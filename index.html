@@ -4,50 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#050505">
-    <meta name="description" content="LANETLI TEAM - Karanlığın Hüküm Sürdüğü Yer">
-    <title>LANETLI</title>
+    <title>LANETLI | The Eternal Curse</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600;700;800;900&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Great+Vibes&family=Sacramento&family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         :root {
-            --primary: #020202;
-            --secondary: #050505;
-            --surface: #080808;
-            --surface-hover: #0f0f0f;
-            --accent: #ff1a1a;
-            --accent-glow: rgba(255, 26, 26, 0.3);
-            --accent-light: #ff4444;
+            --primary: #010101;
+            --secondary: #030303;
+            --surface: #060606;
+            --surface-elevated: #0a0a0a;
+            --accent: #ff0a0a;
+            --accent-glow: rgba(255, 10, 10, 0.4);
+            --accent-light: #ff3333;
             --accent-dark: #cc0000;
+            --gold: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.3);
             --text: #ffffff;
-            --text-secondary: #b0b0b0;
-            --text-muted: #555555;
-            --border: #151515;
-            --border-hover: #252525;
-            --glass: rgba(8, 8, 8, 0.92);
-            --glass-border: rgba(255, 255, 255, 0.02);
+            --text-secondary: #c0c0c0;
+            --text-muted: #444444;
+            --border: #111111;
+            --border-hover: #1a1a1a;
         }
 
-        html {
-            scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+        .pink-theme {
+            --primary: #0a0206;
+            --secondary: #14040e;
+            --surface: #1e0618;
+            --accent: #ff1493;
+            --accent-glow: rgba(255, 20, 147, 0.4);
+            --accent-light: #ff69b4;
+            --accent-dark: #c71585;
+            --gold: #ff69b4;
+            --gold-glow: rgba(255, 105, 180, 0.3);
+            --text: #fff0f5;
+            --text-secondary: #ffb6c1;
+            --text-muted: #8b5a6b;
+            --border: #2d0f1a;
+            --border-hover: #3d1f2a;
         }
+
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
         body {
             background: var(--primary);
             color: var(--text);
-            font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
+            font-family: 'Rajdhani', 'Montserrat', sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
-            line-height: 1.6;
             cursor: none;
         }
 
@@ -61,161 +67,145 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s;
+            transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.5s;
         }
 
-        .loader.done {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
+        .loader.done { opacity: 0; visibility: hidden; pointer-events: none; }
 
         .loader-brand {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(2rem, 6vw, 4rem);
             font-weight: 900;
-            letter-spacing: 0.5em;
+            letter-spacing: 0.8em;
             color: var(--accent);
-            margin-bottom: 3rem;
-            position: relative;
             text-transform: uppercase;
+            animation: loaderGlitch 0.8s steps(2) infinite;
+            position: relative;
+        }
+
+        .loader-brand::before, .loader-brand::after {
+            content: 'LANETLI';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
         }
 
         .loader-brand::before {
-            content: 'LANETLI';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            color: var(--accent);
-            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
-            transform: translate(-3px, 2px);
-            animation: loaderGlitchTop 0.4s infinite linear alternate-reverse;
+            color: #00ff00;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+            transform: translate(-4px, 3px);
+            animation: loaderGlitch1 0.4s infinite;
         }
 
         .loader-brand::after {
-            content: 'LANETLI';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            color: var(--accent);
-            clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
-            transform: translate(3px, -2px);
-            animation: loaderGlitchBottom 0.4s infinite linear alternate-reverse;
+            color: #0000ff;
+            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+            transform: translate(4px, -3px);
+            animation: loaderGlitch2 0.4s infinite;
         }
 
-        @keyframes loaderGlitchTop {
-            0% { transform: translate(-3px, 2px); }
-            100% { transform: translate(3px, -2px); }
+        @keyframes loaderGlitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-4px, 4px); }
+            40% { transform: translate(4px, -4px); }
+            60% { transform: translate(-4px, -4px); }
+            80% { transform: translate(4px, 4px); }
+            100% { transform: translate(0); }
         }
 
-        @keyframes loaderGlitchBottom {
-            0% { transform: translate(3px, -2px); }
-            100% { transform: translate(-3px, 2px); }
-        }
+        @keyframes loaderGlitch1 { 0%, 100% { transform: translate(-4px, 3px); } 50% { transform: translate(4px, -3px); } }
+        @keyframes loaderGlitch2 { 0%, 100% { transform: translate(4px, -3px); } 50% { transform: translate(-4px, 3px); } }
 
         .loader-progress {
-            width: min(280px, 65vw);
-            height: 2px;
+            width: min(300px, 70vw);
+            height: 3px;
             background: var(--border);
             border-radius: 2px;
             overflow: hidden;
+            margin-top: 2.5rem;
             position: relative;
         }
 
         .loader-progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, var(--accent-dark), var(--accent), var(--accent-light), var(--accent));
-            background-size: 300% 100%;
+            background: linear-gradient(90deg, var(--accent-dark), var(--accent), var(--accent-light), var(--gold), var(--accent));
+            background-size: 400% 100%;
             border-radius: 2px;
-            animation: loadProgress 3s cubic-bezier(0.4, 0, 0.2, 1) forwards, shimmer 1.5s infinite;
+            animation: loadProgress 3s cubic-bezier(0.4, 0, 0.2, 1) forwards, shimmer 2s infinite;
             box-shadow: 0 0 40px var(--accent-glow);
         }
 
-        @keyframes loadProgress {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        @keyframes shimmer {
-            0% { background-position: 300% 0; }
-            100% { background-position: -300% 0; }
-        }
+        @keyframes loadProgress { from { width: 0; } to { width: 100%; } }
+        @keyframes shimmer { 0% { background-position: 400% 0; } 100% { background-position: -400% 0; } }
 
         .loader-percent {
             font-family: 'Orbitron', monospace;
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: var(--text-muted);
             margin-top: 1.5rem;
-            letter-spacing: 0.3em;
+            letter-spacing: 0.4em;
             font-variant-numeric: tabular-nums;
         }
 
         .loader-status {
             font-family: 'Rajdhani', sans-serif;
-            font-size: 0.7rem;
-            font-weight: 500;
+            font-size: 0.75rem;
+            font-weight: 600;
             color: var(--text-muted);
-            margin-top: 0.5rem;
+            margin-top: 0.75rem;
             letter-spacing: 0.3em;
             text-transform: uppercase;
         }
 
-        /* ===== CUSTOM CURSOR ===== */
+        /* ===== CURSOR ===== */
         .cursor {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: var(--accent);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 10000;
             mix-blend-mode: difference;
-            transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s, height 0.3s;
-            will-change: transform;
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-
-        .cursor.hover {
-            transform: scale(3.5);
-            background: transparent;
-            border: 1.5px solid var(--accent);
-            mix-blend-mode: normal;
+            transition: transform 0.1s, width 0.3s, height 0.3s;
             box-shadow: 0 0 30px var(--accent-glow);
         }
 
-        .cursor.click {
-            transform: scale(0.3);
-            background: var(--accent-light);
+        .cursor.hover {
+            transform: scale(4);
+            background: transparent;
+            border: 2px solid var(--accent);
+            mix-blend-mode: normal;
         }
 
+        .cursor.click { transform: scale(0.3); }
+
         .cursor-ring {
-            width: 45px;
-            height: 45px;
-            border: 1.5px solid rgba(255, 26, 26, 0.12);
+            width: 50px;
+            height: 50px;
+            border: 1.5px solid rgba(255, 10, 10, 0.15);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s, height 0.3s, border-color 0.3s;
-            will-change: transform;
+            transition: transform 0.2s, width 0.3s, height 0.3s, border-color 0.3s;
         }
 
         .cursor-ring.hover {
-            width: 65px;
-            height: 65px;
-            border-color: rgba(255, 26, 26, 0.35);
+            width: 70px;
+            height: 70px;
+            border-color: rgba(255, 10, 10, 0.4);
         }
+
+        .pink-theme .cursor { background: var(--accent); box-shadow: 0 0 30px var(--accent-glow); }
+        .pink-theme .cursor-ring { border-color: rgba(255, 20, 147, 0.15); }
+        .pink-theme .cursor-ring.hover { border-color: rgba(255, 20, 147, 0.4); }
 
         @media (pointer: coarse) {
             .cursor, .cursor-ring { display: none !important; }
             body { cursor: auto; }
         }
 
-        /* ===== NAVIGATION ===== */
+        /* ===== NAV ===== */
         .nav {
             position: fixed;
             top: 0;
@@ -230,7 +220,7 @@
         }
 
         .nav.scrolled {
-            background: rgba(2, 2, 2, 0.9);
+            background: rgba(1, 1, 1, 0.95);
             backdrop-filter: blur(40px) saturate(200%);
             -webkit-backdrop-filter: blur(40px) saturate(200%);
             border-bottom: 1px solid var(--border);
@@ -238,78 +228,32 @@
             padding-bottom: 0.8rem;
         }
 
+        .pink-theme .nav.scrolled {
+            background: rgba(10, 2, 6, 0.95);
+            border-bottom: 1px solid var(--border);
+        }
+
         .nav-logo {
             font-family: 'Orbitron', sans-serif;
             font-size: clamp(1rem, 2.2vw, 1.4rem);
-            font-weight: 800;
+            font-weight: 900;
             letter-spacing: 0.4em;
             color: var(--text);
             text-decoration: none;
-            position: relative;
             text-transform: uppercase;
         }
 
         .nav-logo span {
             color: var(--accent);
             transition: all 0.4s;
-            text-shadow: 0 0 20px transparent;
         }
 
         .nav-logo:hover span {
-            color: var(--accent-light);
             text-shadow: 0 0 30px var(--accent-glow);
         }
 
-        .nav-menu {
-            display: flex;
-            gap: clamp(2rem, 4vw, 4rem);
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-menu a {
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: clamp(0.75rem, 1.2vw, 0.9rem);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            padding: 0.5rem 0;
-        }
-
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1.5px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light));
-            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 0 15px var(--accent-glow);
-        }
-
-        .nav-menu a:hover {
-            color: var(--text);
-        }
-
-        .nav-menu a:hover::after {
-            width: 100%;
-        }
-
-        .nav-menu a.active {
-            color: var(--text);
-        }
-
-        .nav-menu a.active::after {
-            width: 100%;
-        }
-
         .menu-toggle {
-            display: none;
+            display: flex;
             flex-direction: column;
             gap: 5px;
             background: none;
@@ -317,50 +261,84 @@
             cursor: none;
             padding: 0.5rem;
             z-index: 101;
+            position: relative;
         }
 
         .menu-toggle span {
             display: block;
-            width: 26px;
+            width: 28px;
             height: 2px;
             background: var(--text);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             transform-origin: center;
         }
 
-        .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-        .menu-toggle.active span:nth-child(2) {
+        /* ===== FULLSCREEN MENU ===== */
+        .fullscreen-menu {
+            position: fixed;
+            inset: 0;
+            background: var(--primary);
+            z-index: 99;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
             opacity: 0;
-            transform: scaleX(0);
+            visibility: hidden;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 2rem;
         }
 
-        .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
+        .fullscreen-menu.active { opacity: 1; visibility: visible; }
+
+        .fullscreen-menu .menu-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 0.6em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
         }
 
-        @media (max-width: 768px) {
-            .menu-toggle { display: flex; }
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 100%;
-                height: 100vh;
-                height: 100dvh;
-                background: var(--primary);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 2.5rem;
-                transition: right 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-                z-index: 100;
-            }
-            .nav-menu.active { right: 0; }
-            .nav-menu a { font-size: 1.4rem; font-weight: 700; }
+        .fullscreen-menu a {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: all 0.4s;
+            position: relative;
+            padding: 1rem 2rem;
+            border: 1px solid transparent;
         }
+
+        .fullscreen-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            transition: width 0.5s;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .fullscreen-menu a:hover {
+            color: var(--accent);
+            border-color: var(--border);
+            background: var(--surface);
+        }
+
+        .fullscreen-menu a:hover::after { width: 80%; }
 
         /* ===== HERO ===== */
         .hero {
@@ -384,35 +362,35 @@
         .hero-grid {
             position: absolute;
             inset: 0;
-            background-image: 
-                linear-gradient(rgba(255,26,26,0.015) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,26,26,0.015) 1px, transparent 1px);
-            background-size: clamp(60px, 10vw, 120px) clamp(60px, 10vw, 120px);
-            mask-image: radial-gradient(ellipse at center, black 25%, transparent 65%);
-            -webkit-mask-image: radial-gradient(ellipse at center, black 25%, transparent 65%);
+            background-image:
+                linear-gradient(rgba(255,10,10,0.008) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,10,10,0.008) 1px, transparent 1px);
+            background-size: 100px 100px;
+            mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
             animation: gridPulse 10s ease-in-out infinite;
         }
 
-        @keyframes gridPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
+        @keyframes gridPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
         .hero-glow {
             position: absolute;
-            width: 900px;
-            height: 900px;
-            background: radial-gradient(circle, rgba(255, 26, 26, 0.07) 0%, transparent 55%);
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle, rgba(255, 10, 10, 0.06) 0%, transparent 55%);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            animation: glowPulse 8s ease-in-out infinite;
-            pointer-events: none;
+            animation: glowPulse 10s ease-in-out infinite;
+        }
+
+        .pink-theme .hero-glow {
+            background: radial-gradient(circle, rgba(255, 20, 147, 0.08) 0%, transparent 55%);
         }
 
         @keyframes glowPulse {
             0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
-            50% { transform: translate(-50%, -50%) scale(1.4); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.3; }
         }
 
         .hero-vignette {
@@ -427,44 +405,31 @@
             position: relative;
             z-index: 10;
             text-align: center;
-            max-width: 1100px;
+            max-width: 1200px;
             width: 100%;
-            perspective: 1200px;
         }
 
         .hero-eyebrow {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: clamp(0.7rem, 1.3vw, 0.9rem);
-            font-weight: 600;
-            letter-spacing: 0.7em;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.8em;
             text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+            color: var(--gold);
+            margin-bottom: 2.5rem;
             opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.6s forwards;
-            position: relative;
-            display: inline-block;
+            animation: fadeUp 1.2s 0.5s forwards;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
         }
 
-        .hero-eyebrow::before,
-        .hero-eyebrow::after {
+        .hero-eyebrow::before, .hero-eyebrow::after {
             content: '';
-            position: absolute;
-            top: 50%;
-            width: 40px;
+            width: 60px;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent));
-        }
-
-        .hero-eyebrow::before { 
-            right: calc(100% + 20px); 
-            background: linear-gradient(90deg, var(--accent), transparent);
-        }
-
-        .hero-eyebrow::after { 
-            left: calc(100% + 20px); 
-            background: linear-gradient(90deg, transparent, var(--accent));
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
         }
 
         .hero-title {
@@ -473,10 +438,8 @@
             font-weight: 900;
             letter-spacing: 0.15em;
             line-height: 0.9;
-            margin-bottom: clamp(2rem, 4vw, 3rem);
-            position: relative;
-            transform-style: preserve-3d;
             text-transform: uppercase;
+            margin-bottom: 1.5rem;
         }
 
         .hero-title .char {
@@ -484,28 +447,24 @@
             opacity: 0;
             transform: translateY(120px) rotateX(-90deg) scale(0.5);
             animation: charReveal 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            transform-origin: bottom;
             background: linear-gradient(180deg, var(--text) 0%, var(--text-secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 0 30px rgba(255, 26, 26, 0.2));
+            filter: drop-shadow(0 0 40px rgba(255, 10, 10, 0.2));
         }
 
-        .hero-title .char:nth-child(1) { animation-delay: 0.7s; }
-        .hero-title .char:nth-child(2) { animation-delay: 0.75s; }
-        .hero-title .char:nth-child(3) { animation-delay: 0.8s; }
-        .hero-title .char:nth-child(4) { animation-delay: 0.85s; }
-        .hero-title .char:nth-child(5) { animation-delay: 0.9s; }
-        .hero-title .char:nth-child(6) { animation-delay: 0.95s; }
-        .hero-title .char:nth-child(7) { animation-delay: 1s; }
+        .hero-title .char:nth-child(1) { animation-delay: 0.6s; }
+        .hero-title .char:nth-child(2) { animation-delay: 0.65s; }
+        .hero-title .char:nth-child(3) { animation-delay: 0.7s; }
+        .hero-title .char:nth-child(4) { animation-delay: 0.75s; }
+        .hero-title .char:nth-child(5) { animation-delay: 0.8s; }
+        .hero-title .char:nth-child(6) { animation-delay: 0.85s; }
+        .hero-title .char:nth-child(7) { animation-delay: 0.9s; }
 
         .hero-title::after {
             content: 'LANETLI';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+            top: 0; left: 0; width: 100%;
             font-family: 'Orbitron', sans-serif;
             font-weight: 900;
             letter-spacing: 0.15em;
@@ -514,51 +473,61 @@
             background: linear-gradient(180deg, var(--accent) 0%, var(--accent-dark) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             opacity: 0;
             clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
             transform: translate(-5px, 5px);
-            animation: glitchReveal 0.5s ease 1.8s forwards, glitchLoop 3.5s ease 2.5s infinite;
-            filter: drop-shadow(0 0 20px var(--accent-glow));
+            animation: glitchReveal 0.5s ease 1.5s forwards, glitchLoop 4s ease 2s infinite;
+            filter: drop-shadow(0 0 30px var(--accent-glow));
         }
 
-        @keyframes glitchReveal {
-            to { opacity: 0.8; }
-        }
+        @keyframes glitchReveal { to { opacity: 0.8; } }
 
         @keyframes glitchLoop {
-            0%, 88%, 100% { opacity: 0.8; transform: translate(-5px, 5px); }
-            90% { opacity: 1; transform: translate(5px, -5px); }
-            92% { opacity: 0.2; transform: translate(-3px, 3px); }
-            94% { opacity: 0.9; transform: translate(3px, -3px); }
-            96% { opacity: 0.4; transform: translate(-5px, -5px); }
-            98% { opacity: 0.8; transform: translate(5px, 5px); }
+            0%, 90%, 100% { opacity: 0.8; transform: translate(-5px, 5px); }
+            92% { opacity: 1; transform: translate(5px, -5px); }
+            94% { opacity: 0.2; transform: translate(-3px, 3px); }
+            96% { opacity: 0.9; transform: translate(3px, -3px); }
+            98% { opacity: 0.4; transform: translate(-5px, -5px); }
         }
 
         .hero-subtitle {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(0.85rem, 1.8vw, 1.3rem);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 2.2vw, 1.6rem);
             font-weight: 400;
             font-style: italic;
-            letter-spacing: 0.5em;
-            text-transform: uppercase;
+            letter-spacing: 0.4em;
             color: var(--text-muted);
-            margin-bottom: clamp(4rem, 8vw, 6rem);
+            margin-bottom: 3rem;
             opacity: 0;
-            animation: fadeUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) 1.4s forwards;
-            position: relative;
+            animation: fadeUp 1.2s 1.4s forwards;
         }
 
-        .hero-subtitle::before {
+        .hero-quote {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            line-height: 2;
+            color: var(--text-secondary);
+            max-width: 750px;
+            margin: 0 auto 3rem;
+            opacity: 0;
+            animation: fadeUp 1.2s 1.8s forwards;
+            position: relative;
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .hero-quote::before {
             content: '❝';
             position: absolute;
+            top: -1.5rem;
             left: 50%;
-            top: -2rem;
             transform: translateX(-50%);
-            font-family: 'Cinzel', serif;
-            font-size: 2rem;
+            font-size: 4rem;
             color: var(--accent);
-            opacity: 0.3;
+            opacity: 0.2;
         }
 
         .hero-cta-group {
@@ -567,7 +536,7 @@
             justify-content: center;
             flex-wrap: wrap;
             opacity: 0;
-            animation: fadeUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) 1.8s forwards;
+            animation: fadeUp 1.2s 2.2s forwards;
         }
 
         .btn {
@@ -604,14 +573,12 @@
             transition: transform 0.8s;
         }
 
-        .btn-primary:hover::before {
-            transform: translateX(100%) skewX(-20deg);
-        }
+        .btn-primary:hover::before { transform: translateX(100%) skewX(-20deg); }
 
         .btn-primary:hover {
             background: linear-gradient(135deg, var(--accent), var(--accent-light));
             border-color: var(--accent-light);
-            box-shadow: 0 0 80px var(--accent-glow), 0 15px 50px rgba(255, 26, 26, 0.15);
+            box-shadow: 0 0 80px var(--accent-glow), 0 15px 50px rgba(255, 10, 10, 0.2);
             transform: translateY(-4px);
         }
 
@@ -633,16 +600,14 @@
         .btn svg {
             width: 16px;
             height: 16px;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.4s;
         }
 
-        .btn:hover svg {
-            transform: translateX(6px);
-        }
+        .btn:hover svg { transform: translateX(6px); }
 
         .scroll-hint {
             position: absolute;
-            bottom: clamp(2rem, 5vh, 4rem);
+            bottom: 3rem;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -650,7 +615,7 @@
             align-items: center;
             gap: 0.75rem;
             opacity: 0;
-            animation: fadeUp 1s cubic-bezier(0.4, 0, 0.2, 1) 2.5s forwards;
+            animation: fadeUp 1s 2.8s forwards;
             z-index: 10;
         }
 
@@ -658,9 +623,9 @@
             font-family: 'Rajdhani', sans-serif;
             font-size: 0.7rem;
             font-weight: 600;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
+            letter-spacing: 0.3em;
             color: var(--text-muted);
+            text-transform: uppercase;
         }
 
         .scroll-hint-line {
@@ -669,7 +634,6 @@
             background: linear-gradient(to bottom, var(--accent), transparent);
             position: relative;
             overflow: hidden;
-            border-radius: 1px;
         }
 
         .scroll-hint-line::after {
@@ -683,17 +647,13 @@
             animation: scrollLineMove 2.5s ease-in-out infinite;
         }
 
-        @keyframes scrollLineMove {
-            0% { top: -100%; }
-            100% { top: 100%; }
-        }
+        @keyframes scrollLineMove { 0% { top: -100%; } 100% { top: 100%; } }
 
-        /* ===== TEAM ===== */
-        .team {
-            padding: clamp(10rem, 18vh, 14rem) clamp(1.5rem, 5vw, 4rem);
-            max-width: 1200px;
+        /* ===== ABOUT ===== */
+        .about {
+            padding: clamp(10rem, 20vh, 15rem) clamp(1.5rem, 5vw, 4rem);
+            max-width: 1100px;
             margin: 0 auto;
-            position: relative;
         }
 
         .section-header {
@@ -702,12 +662,12 @@
         }
 
         .section-eyebrow {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Cinzel', serif;
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 400;
             letter-spacing: 0.6em;
             text-transform: uppercase;
-            color: var(--accent);
+            color: var(--gold);
             margin-bottom: 2rem;
             display: flex;
             align-items: center;
@@ -715,245 +675,355 @@
             gap: 2rem;
         }
 
-        .section-eyebrow::before,
-        .section-eyebrow::after {
+        .section-eyebrow::before, .section-eyebrow::after {
             content: '';
-            width: 60px;
-            height: 1.5px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
         }
 
         .section-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2.2rem, 5.5vw, 4.5rem);
+            font-size: clamp(2.5rem, 6vw, 5rem);
             font-weight: 900;
-            letter-spacing: 0.12em;
-            line-height: 1.1;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
             background: linear-gradient(180deg, var(--text) 0%, var(--text-secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: clamp(2.5rem, 5vw, 4rem);
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
         }
 
-        @media (max-width: 768px) {
-            .team-grid { grid-template-columns: 1fr; }
+        .about-text {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+            font-weight: 400;
+            line-height: 2.2;
+            color: var(--text-secondary);
+            text-align: center;
         }
 
-        .team-card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: clamp(3rem, 6vw, 5rem);
+        .about-text strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .about-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            font-weight: 400;
+            font-style: italic;
+            text-align: center;
+            color: var(--text);
+            letter-spacing: 0.1em;
+            padding: 4rem 3rem;
+            border: 1px solid var(--border);
+            position: relative;
+            background: var(--surface);
+            line-height: 1.8;
+        }
+
+        .about-quote::before {
+            content: '❝';
+            position: absolute;
+            top: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 5rem;
+            color: var(--accent);
+            opacity: 0.15;
+        }
+
+        .about-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(40px) saturate(180%);
-            -webkit-backdrop-filter: blur(40px) saturate(180%);
-            transform-style: preserve-3d;
-            perspective: 1000px;
         }
 
-        .team-card::before {
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent), var(--gold));
+            transform: scaleY(0);
+            transition: transform 0.8s;
+        }
+
+        .timeline-item:hover::before { transform: scaleY(1); }
+
+        .timeline-item:hover {
+            border-color: rgba(255, 10, 10, 0.2);
+            transform: translateX(15px);
+            box-shadow: 0 0 60px rgba(255, 10, 10, 0.05);
+        }
+
+        .timeline-year {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent);
+            min-width: 120px;
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .timeline-text {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* ===== FOUNDERS SPECIAL ===== */
+        .founders-special {
+            padding: clamp(10rem, 20vh, 15rem) clamp(1.5rem, 5vw, 4rem);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .founders-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(3rem, 6vw, 5rem);
+        }
+
+        @media (max-width: 968px) {
+            .founders-grid { grid-template-columns: 1fr; }
+        }
+
+        .founder-card {
+            position: relative;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: clamp(3rem, 6vw, 5rem);
+            overflow: hidden;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+        }
+
+        .founder-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light), transparent);
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--gold), transparent);
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .team-card::after {
+        .founder-card::after {
             content: '';
             position: absolute;
             inset: 0;
             border-radius: 24px;
             padding: 1.5px;
-            background: linear-gradient(135deg, rgba(255, 26, 26, 0.2), transparent 40%, transparent 60%, rgba(255, 26, 26, 0.08));
+            background: linear-gradient(135deg, rgba(255, 10, 10, 0.2), transparent 40%, transparent 60%, rgba(212, 175, 55, 0.1));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             opacity: 0;
-            transition: opacity 0.7s;
+            transition: opacity 0.8s;
             pointer-events: none;
         }
 
-        .team-card:hover::before {
-            transform: scaleX(1);
+        .founder-card:hover::before { transform: scaleX(1); }
+        .founder-card:hover::after { opacity: 1; }
+
+        .founder-card:hover {
+            border-color: rgba(255, 10, 10, 0.15);
+            transform: translateY(-20px) scale(1.02);
+            box-shadow: 0 50px 120px rgba(0, 0, 0, 0.6), 0 0 150px rgba(255, 10, 10, 0.1);
         }
 
-        .team-card:hover::after {
-            opacity: 1;
-        }
-
-        .team-card:hover {
-            border-color: rgba(255, 26, 26, 0.12);
-            transform: translateY(-15px) rotateX(5deg);
-            box-shadow: 
-                0 40px 100px rgba(0, 0, 0, 0.6),
-                0 0 120px rgba(255, 26, 26, 0.1);
-        }
-
-        .card-glow {
+        .founder-glow {
             position: absolute;
-            top: -60%;
-            right: -60%;
-            width: 120%;
-            height: 120%;
-            background: radial-gradient(circle, rgba(255, 26, 26, 0.1) 0%, transparent 50%);
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 10, 10, 0.06) 0%, transparent 50%);
             opacity: 0;
-            transition: opacity 0.7s;
+            transition: opacity 0.8s;
             pointer-events: none;
         }
 
-        .team-card:hover .card-glow {
-            opacity: 1;
-        }
+        .founder-card:hover .founder-glow { opacity: 1; }
 
-        .card-header {
+        .founder-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 2.5rem;
         }
 
-        .card-index {
+        .founder-number {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(3.5rem, 7vw, 6rem);
+            font-size: clamp(4rem, 8vw, 7rem);
             font-weight: 900;
-            color: rgba(255, 26, 26, 0.06);
+            color: rgba(255, 10, 10, 0.05);
             line-height: 1;
-            user-select: none;
             transition: all 0.5s;
         }
 
-        .team-card:hover .card-index {
-            color: rgba(255, 26, 26, 0.15);
-            text-shadow: 0 0 40px var(--accent-glow);
+        .founder-card:hover .founder-number {
+            color: rgba(255, 10, 10, 0.12);
+            text-shadow: 0 0 60px rgba(255, 10, 10, 0.2);
         }
 
-        .card-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.6rem 1.4rem;
-            background: rgba(255, 26, 26, 0.06);
-            border: 1.5px solid rgba(255, 26, 26, 0.15);
-            border-radius: 100px;
+        .founder-crown {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 0 20px var(--gold-glow));
+            animation: crownFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes crownFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .founder-name {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.65rem;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--accent);
-            transition: all 0.5s;
-        }
-
-        .team-card:hover .card-badge {
-            background: rgba(255, 26, 26, 0.12);
-            border-color: rgba(255, 26, 26, 0.25);
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-
-        .card-badge-dot {
-            width: 7px;
-            height: 7px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-            box-shadow: 0 0 15px var(--accent-glow);
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.3; transform: scale(0.6); }
-        }
-
-        .card-name {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 900;
             letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-            line-height: 1.2;
             text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
         }
 
-        .card-name span {
-            color: var(--accent);
-            transition: all 0.5s;
-            display: inline-block;
+        .founder-name span {
             background: linear-gradient(135deg, var(--accent), var(--accent-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
+            transition: all 0.5s;
         }
 
-        .team-card:hover .card-name span {
-            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+        .founder-card:hover .founder-name span {
+            background: linear-gradient(135deg, var(--accent-light), var(--gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 40px var(--accent-glow);
-            transform: translateX(8px);
+            filter: drop-shadow(0 0 30px var(--accent-glow));
         }
 
-        .card-handle {
-            font-family: 'Rajdhani', sans-serif;
+        .founder-title {
+            font-family: 'Cinzel', serif;
             font-size: 1rem;
-            font-weight: 500;
-            color: var(--text-muted);
+            font-weight: 400;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--gold);
             margin-bottom: 2.5rem;
             display: flex;
             align-items: center;
             gap: 1rem;
-            letter-spacing: 0.1em;
         }
 
-        .card-handle::before {
+        .founder-title::before {
             content: '';
-            width: 30px;
-            height: 1.5px;
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .founder-divider {
+            width: 100%;
+            height: 1px;
             background: linear-gradient(90deg, var(--border), transparent);
+            margin-bottom: 2.5rem;
         }
 
-        .card-desc {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 400;
+        .founder-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-style: italic;
             line-height: 2;
-            color: var(--text-muted);
-            margin-bottom: 3rem;
-            transition: color 0.5s;
-        }
-
-        .team-card:hover .card-desc {
             color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            position: relative;
+            padding-left: 2rem;
+            border-left: 3px solid var(--accent);
+            transition: all 0.5s;
         }
 
-        .card-footer {
+        .founder-card:hover .founder-quote {
+            color: var(--text);
+            border-left-color: var(--gold);
+        }
+
+        .founder-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.2rem;
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.4s;
+        }
+
+        .stat:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 25px var(--accent-glow);
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .stat-label {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .founder-social {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 2rem;
+            gap: 1rem;
         }
 
-        .card-social {
+        .social-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.8rem;
-            padding: 1rem 2rem;
+            gap: 0.75rem;
+            padding: 1.1rem 2rem;
             background: transparent;
             border: 1.5px solid var(--border);
             border-radius: 12px;
@@ -962,13 +1032,15 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 0.8rem;
             font-weight: 600;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.1em;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            flex: 1;
+            justify-content: center;
         }
 
-        .card-social::before {
+        .social-btn::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -979,66 +1051,292 @@
             z-index: -1;
         }
 
-        .card-social:hover::before {
-            transform: scaleX(1);
-        }
+        .social-btn:hover::before { transform: scaleX(1); }
 
-        .card-social:hover {
+        .social-btn:hover {
             border-color: var(--accent);
             color: var(--text);
             box-shadow: 0 0 40px var(--accent-glow);
             transform: translateX(8px);
         }
 
-        .card-social svg {
+        .social-btn svg {
             width: 20px;
             height: 20px;
             fill: currentColor;
             transition: transform 0.4s;
         }
 
-        .card-social:hover svg {
-            transform: scale(1.3) rotate(-8deg);
+        .social-btn:hover svg { transform: scale(1.3) rotate(-8deg); }
+
+        /* ===== MEMBERS SECTION ===== */
+        .members {
+            padding: clamp(10rem, 20vh, 15rem) clamp(1.5rem, 5vw, 4rem);
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        .card-stats {
+        .members-header {
+            text-align: center;
+            margin-bottom: clamp(6rem, 12vh, 10rem);
+        }
+
+        .members-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            background: linear-gradient(180deg, var(--text) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .members-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-muted);
+            letter-spacing: 0.3em;
+        }
+
+        .gender-section {
+            margin-bottom: 8rem;
+        }
+
+        .gender-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 4rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--border);
             display: flex;
-            gap: 2.5rem;
+            align-items: center;
+            gap: 2rem;
         }
 
-        .stat {
+        .gender-title::before {
+            content: '';
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .member-card {
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: none;
             text-align: center;
         }
 
-        .stat-value {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--text);
-            line-height: 1;
-            background: linear-gradient(180deg, var(--text), var(--text-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light), transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.8s;
         }
 
-        .stat-label {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.7rem;
+        .member-card:hover::before { transform: scaleX(1); }
+
+        .member-card:hover {
+            border-color: rgba(255, 10, 10, 0.2);
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 60px rgba(255, 10, 10, 0.08);
+        }
+
+        .member-rank {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.65rem;
             font-weight: 600;
-            color: var(--text-muted);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            padding: 0.4rem 1rem;
+            border: 1.5px solid var(--accent);
+            border-radius: 4px;
+            background: rgba(255, 10, 10, 0.05);
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            transition: all 0.4s;
+        }
+
+        .member-card:hover .member-rank {
+            background: rgba(255, 10, 10, 0.1);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .member-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }
+
+        .member-name span {
+            color: var(--accent);
+            transition: all 0.4s;
+        }
+
+        .member-card:hover .member-name span {
+            text-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .member-role {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gold);
             letter-spacing: 0.2em;
             text-transform: uppercase;
-            margin-top: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .member-role::before {
+            content: '◆';
+            color: var(--accent);
+            font-size: 0.6rem;
+        }
+
+        /* ===== PINK THEME MEMBERS ===== */
+        .pink-section {
+            background: linear-gradient(180deg, var(--primary) 0%, #1a0510 50%, var(--primary) 100%);
+            position: relative;
+        }
+
+        .pink-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(255, 20, 147, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(255, 105, 180, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .pink-section .gender-title {
+            color: var(--accent-light);
+        }
+
+        .pink-section .gender-title::before {
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .pink-section .member-card {
+            background: linear-gradient(135deg, #1a0510, #240818);
+            border-color: rgba(255, 20, 147, 0.15);
+        }
+
+        .pink-section .member-card:hover {
+            border-color: rgba(255, 20, 147, 0.3);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 80px rgba(255, 20, 147, 0.1);
+        }
+
+        .pink-section .member-rank {
+            color: var(--accent);
+            border-color: var(--accent);
+            background: rgba(255, 20, 147, 0.08);
+        }
+
+        .pink-section .member-role {
+            color: var(--accent-light);
+        }
+
+        .pink-section .member-role::before {
+            color: var(--accent);
+        }
+
+        .slayy-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Sacramento', cursive;
+            font-size: 1.4rem;
+            color: var(--accent-light);
+            margin-bottom: 1rem;
+        }
+
+        .slayy-badge::before {
+            content: '✦';
+            font-size: 1rem;
+        }
+
+        /* ===== LEGACY ===== */
+        .legacy {
+            padding: clamp(10rem, 20vh, 15rem) clamp(1.5rem, 5vw, 4rem);
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .legacy-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+        }
+
+        .legacy-text {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+            font-weight: 400;
+            line-height: 2.4;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+        }
+
+        .legacy-text strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .legacy-signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: var(--gold);
+            margin-top: 2rem;
+            opacity: 0.9;
         }
 
         /* ===== FOOTER ===== */
         .footer {
-            padding: clamp(5rem, 10vh, 8rem) clamp(1.5rem, 5vw, 4rem);
+            padding: clamp(6rem, 12vh, 10rem) clamp(1.5rem, 5vw, 4rem);
             border-top: 1px solid var(--border);
             text-align: center;
             position: relative;
-            overflow: hidden;
         }
 
         .footer::before {
@@ -1047,44 +1345,37 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 400px;
-            height: 1.5px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            opacity: 0.6;
+            width: 500px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), var(--gold), transparent);
         }
 
         .footer-brand {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.8rem, 3.5vw, 3rem);
+            font-size: clamp(2rem, 4vw, 3.5rem);
             font-weight: 900;
             letter-spacing: 0.5em;
-            margin-bottom: 1.5rem;
             text-transform: uppercase;
+            margin-bottom: 1.5rem;
         }
 
         .footer-brand span {
             color: var(--accent);
             animation: brandGlow 4s ease-in-out infinite;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         @keyframes brandGlow {
-            0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 26, 26, 0.3)); }
-            50% { filter: drop-shadow(0 0 50px rgba(255, 26, 26, 0.6)); }
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 10, 10, 0.3)); }
+            50% { filter: drop-shadow(0 0 60px rgba(255, 10, 10, 0.6)); }
         }
 
         .footer-tagline {
             font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            font-weight: 400;
+            font-size: 1.2rem;
             font-style: italic;
             color: var(--text-muted);
             letter-spacing: 0.4em;
             margin-bottom: 3rem;
-            text-transform: uppercase;
         }
 
         .footer-links {
@@ -1097,7 +1388,7 @@
 
         .footer-links a {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--text-muted);
             text-decoration: none;
@@ -1130,7 +1421,7 @@
 
         .footer-copy {
             font-family: 'Rajdhani', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 500;
             color: var(--text-muted);
             letter-spacing: 0.25em;
@@ -1144,14 +1435,8 @@
         }
 
         @keyframes charReveal {
-            from {
-                opacity: 0;
-                transform: translateY(120px) rotateX(-90deg) scale(0.5);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) rotateX(0) scale(1);
-            }
+            from { opacity: 0; transform: translateY(120px) rotateX(-90deg) scale(0.5); }
+            to { opacity: 1; transform: translateY(0) rotateX(0) scale(1); }
         }
 
         /* ===== SCROLL REVEAL ===== */
@@ -1170,7 +1455,7 @@
         .reveal-delay-2 { transition-delay: 0.4s; }
         .reveal-delay-3 { transition-delay: 0.6s; }
 
-        /* ===== PARTICLES CANVAS ===== */
+        /* ===== PARTICLES ===== */
         #particles {
             position: fixed;
             top: 0;
@@ -1181,11 +1466,10 @@
             z-index: 2;
         }
 
-        /* ===== SMOOTH SCROLLBAR ===== */
+        /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar { width: 3px; }
         ::-webkit-scrollbar-track { background: var(--primary); }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
 
         /* ===== SELECTION ===== */
         ::selection {
@@ -1197,7 +1481,6 @@
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
         }
@@ -1208,7 +1491,6 @@
             .scroll-hint { display: none; }
         }
     </style>
-<base target="_blank">
 </head>
 <body>
     <!-- Loader -->
@@ -1221,14 +1503,14 @@
         <div class="loader-status">Sistem Yukleniyor...</div>
     </div>
 
-    <!-- Custom Cursor -->
+    <!-- Cursor -->
     <div class="cursor" id="cursor"></div>
     <div class="cursor-ring" id="cursorRing"></div>
 
     <!-- Particles -->
     <canvas id="particles"></canvas>
 
-    <!-- Navigation -->
+    <!-- Nav -->
     <nav class="nav" id="nav">
         <a href="#" class="nav-logo">LANE<span>TLI</span></a>
         <button class="menu-toggle" id="menuToggle" aria-label="Menu">
@@ -1236,12 +1518,18 @@
             <span></span>
             <span></span>
         </button>
-        <ul class="nav-menu" id="navMenu">
-            <li><a href="#home" class="active">Ana Sayfa</a></li>
-            <li><a href="#team">Kurucular</a></li>
-            <li><a href="#footer">Iletisim</a></li>
-        </ul>
     </nav>
+
+    <!-- Fullscreen Menu -->
+    <div class="fullscreen-menu" id="fullscreenMenu">
+        <div class="menu-label">Navigasyon</div>
+        <a href="#home">Ana Sayfa</a>
+        <a href="#about">Hakkimizda</a>
+        <a href="#founders">Kurucular</a>
+        <a href="#members">Erkekler</a>
+        <a href="#girls">LANETLI Slayy</a>
+        <a href="#footer">Iletisim</a>
+    </div>
 
     <!-- Hero -->
     <section class="hero" id="home">
@@ -1252,7 +1540,7 @@
         </div>
 
         <div class="hero-content">
-            <p class="hero-eyebrow">LANETLI TEAM</p>
+            <p class="hero-eyebrow">The Eternal Curse</p>
             <h1 class="hero-title">
                 <span class="char">L</span>
                 <span class="char">A</span>
@@ -1262,19 +1550,24 @@
                 <span class="char">L</span>
                 <span class="char">I</span>
             </h1>
-            <p class="hero-subtitle">Karanligin Hukum Surdugu Yer</p>
-            
+            <p class="hero-subtitle">Karanliğin Hukum Surdugu Yer</p>
+            <div class="hero-quote">
+                "2016'dan beri ayakta duruyoruz. Cunku biz LANETLI'yiz. Duseriz ama kalkmayi biliriz. Yeniliriz ama pes etmeyi bilmeriz."
+            </div>
             <div class="hero-cta-group">
-                <a href="#team" class="btn btn-primary">
-                    Kesfet
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <a href="#about" class="btn btn-primary">
+                    Hakkimizda
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
                 </a>
-                <a href="https://tiktok.com/@lanxtli" target="_blank" class="btn btn-secondary">
-                    TikTok
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.88-2.89 2.89 2.89 0 0 1 2.88-2.89c.3 0 .59.05.86.13V9.4a6.35 6.35 0 0 0-.86-.06A6.36 6.36 0 0 0 2 15.71a6.36 6.36 0 0 0 6.37 6.36 6.36 6.36 0 0 0 6.37-6.36V7.73a8.16 8.16 0 0 0 4.85 1.58V6.02z"/>
+                <a href="#members" class="btn btn-secondary">
+                    Uyeler
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                     </svg>
                 </a>
             </div>
@@ -1286,78 +1579,300 @@
         </div>
     </section>
 
-    <!-- Team -->
-    <section class="team" id="team">
+    <!-- About -->
+    <section class="about" id="about">
         <div class="section-header reveal">
-            <p class="section-eyebrow">Kurucular</p>
-            <h2 class="section-title">LANETLI TEAM</h2>
+            <p class="section-eyebrow">Tarihce</p>
+            <h2 class="section-title">Hakkimizda</h2>
         </div>
 
-        <div class="team-grid">
-            <!-- Emre -->
-            <article class="team-card reveal reveal-delay-1" data-tilt>
-                <div class="card-glow"></div>
-                <div class="card-header">
-                    <span class="card-index">01</span>
-                    <span class="card-badge">
-                        <span class="card-badge-dot"></span>
-                        Kurucu
-                    </span>
+        <div class="about-content">
+            <p class="about-text reveal">
+                Sanal dunyanin derinliklerinde, <strong>2016</strong> yilinda atilan ilk adimla basladi her sey.
+                O gunlerde sadece bir hayaldi <strong>LANETLI</strong>. Bugun ise buyuk sanalin en tasakli,
+                en korkusuz, en lanetli tagi olarak hukum suruyoruz.
+            </p>
+
+            <div class="about-quote reveal">
+                "Karanlikta yuruyenler, gun isiginda hukum surer. Biz LANETLI'yiz,
+                biz yenilmeziiz, biz sonsuzuz."
+            </div>
+
+            <div class="about-timeline reveal">
+                <div class="timeline-item">
+                    <div class="timeline-year">2016</div>
+                    <div class="timeline-text">Sanalin derinliklerinde ilk adimlar atildi. LANETLI ruyasi basladi.</div>
                 </div>
-                <h3 class="card-name"><span>LANETLI</span> EMRE</h3>
-                <p class="card-handle">TikTok: @lanxtli</p>
-                <p class="card-desc">Lanetli Team'in kurucu ortagi ve vizyoner lideri. Karanlik dunyanin sinirlarini zorlayan, modern ve ucurucu projelerin arkasindaki isim.</p>
-                <div class="card-footer">
-                    <a href="https://tiktok.com/@lanxtli" target="_blank" class="card-social">
+                <div class="timeline-item">
+                    <div class="timeline-year">2018</div>
+                    <div class="timeline-text">Ilk buyuk zaferler. Rakipler tanidi, LANETLI korkusu yayildi.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2020</div>
+                    <div class="timeline-text">Daha da guclendik. Yeni uyeler, yeni zaferler, yeni efsaneler.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2024</div>
+                    <div class="timeline-text">Buyuk sanalin en tasakli tagi olduk. Herkes LANETLI diyor.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2026</div>
+                    <div class="timeline-text">Bugun. Zirvedeyiz ve daha yuksege cikiyoruz. LANETLI ebedi!</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founders - SADECE KURUCULARDA SOZ -->
+    <section class="founders-special" id="founders">
+        <div class="section-header reveal">
+            <p class="section-eyebrow">The Architects</p>
+            <h2 class="section-title">Kurucular</h2>
+        </div>
+
+        <div class="founders-grid">
+            <!-- EMRE - SOZLU -->
+            <article class="founder-card reveal" data-tilt>
+                <div class="founder-glow"></div>
+                <div class="founder-header">
+                    <span class="founder-number">01</span>
+                    <span class="founder-crown">👑</span>
+                </div>
+                <h3 class="founder-name">LANETLI <span>EMRE</span></h3>
+                <div class="founder-title">Kurucu & Vizyoner</div>
+                <div class="founder-divider"></div>
+                <p class="founder-quote">
+                    "Karanlikta yurumeyi ogrendim. Simdi o karanlikta yol gosteren bir isik oldum. LANETLI sadece bir tag degil, bir yasam tarzi. Her duseriz, ama her kalkariz daha guclu."
+                </p>
+                <div class="founder-stats">
+                    <div class="stat">
+                        <div class="stat-value">2016</div>
+                        <div class="stat-label">Baslangic</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">∞</div>
+                        <div class="stat-label">Guc</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">01</div>
+                        <div class="stat-label">Kurucu</div>
+                    </div>
+                </div>
+                <div class="founder-social">
+                    <a href="https://tiktok.com/@lanxtli" target="_blank" class="social-btn">
                         <svg viewBox="0 0 24 24">
                             <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.88-2.89 2.89 2.89 0 0 1 2.88-2.89c.3 0 .59.05.86.13V9.4a6.35 6.35 0 0 0-.86-.06A6.36 6.36 0 0 0 2 15.71a6.36 6.36 0 0 0 6.37 6.36 6.36 6.36 0 0 0 6.37-6.36V7.73a8.16 8.16 0 0 0 4.85 1.58V6.02z"/>
                         </svg>
                         @lanxtli
                     </a>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">01</div>
-                            <div class="stat-label">Kurucu</div>
-                        </div>
-                    </div>
                 </div>
             </article>
 
-            <!-- Trexa -->
-            <article class="team-card reveal reveal-delay-2" data-tilt>
-                <div class="card-glow"></div>
-                <div class="card-header">
-                    <span class="card-index">02</span>
-                    <span class="card-badge">
-                        <span class="card-badge-dot"></span>
-                        Kurucu
-                    </span>
+            <!-- TREXA - SOZLU -->
+            <article class="founder-card reveal reveal-delay-1" data-tilt>
+                <div class="founder-glow"></div>
+                <div class="founder-header">
+                    <span class="founder-number">02</span>
+                    <span class="founder-crown">👑</span>
                 </div>
-                <h3 class="card-name"><span>LANETLI</span> TREXA</h3>
-                <p class="card-handle">TikTok: @lxnetli</p>
-                <p class="card-desc">Lanetli Team'in diger kurucu ortagi. Yaratıciligin ve teknolojinin kesisme noktasinda calisan, sinirsiz hayal gucunun temsilcisi.</p>
-                <div class="card-footer">
-                    <a href="https://tiktok.com/@lxnetli" target="_blank" class="card-social">
+                <h3 class="founder-name">LANETLI <span>TREXA</span></h3>
+                <div class="founder-title">Kurucu & Stratejist</div>
+                <div class="founder-divider"></div>
+                <p class="founder-quote">
+                    "Yaraticilik sinir tanımaz. Teknoloji ve sanatin kesisme noktasinda, LANETLI'yi bir efsaneye cevirdik. Biz sadece oyun oynamiyoruz, oyunu degistiriyoruz."
+                </p>
+                <div class="founder-stats">
+                    <div class="stat">
+                        <div class="stat-value">2016</div>
+                        <div class="stat-label">Baslangic</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">∞</div>
+                        <div class="stat-label">Guc</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">02</div>
+                        <div class="stat-label">Kurucu</div>
+                    </div>
+                </div>
+                <div class="founder-social">
+                    <a href="https://tiktok.com/@lxnetli" target="_blank" class="social-btn">
                         <svg viewBox="0 0 24 24">
                             <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.88-2.89 2.89 2.89 0 0 1 2.88-2.89c.3 0 .59.05.86.13V9.4a6.35 6.35 0 0 0-.86-.06A6.36 6.36 0 0 0 2 15.71a6.36 6.36 0 0 0 6.37 6.36 6.36 6.36 0 0 0 6.37-6.36V7.73a8.16 8.16 0 0 0 4.85 1.58V6.02z"/>
                         </svg>
                         @lxnetli
                     </a>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">02</div>
-                            <div class="stat-label">Kurucu</div>
-                        </div>
-                    </div>
                 </div>
             </article>
         </div>
     </section>
 
+    <!-- Members - ERKEKLER (SADECE LAKAP, SOZ YOK) -->
+    <section class="members" id="members">
+        <div class="members-header reveal">
+            <p class="section-eyebrow">The Brotherhood</p>
+            <h2 class="members-title">LANETLI TEAM</h2>
+            <p class="members-subtitle">Karanliğin Asil Evlatlari</p>
+        </div>
+
+        <div class="gender-section reveal">
+            <h3 class="gender-title">ERKEKLER</h3>
+            <div class="members-grid">
+                <div class="member-card">
+                    <span class="member-rank">Veteran</span>
+                    <h4 class="member-name">LANETLI <span>ARDA</span></h4>
+                    <div class="member-role">YIKILMAZ</div>
+                </div>
+
+                <div class="member-card">
+                    <span class="member-rank">Elite</span>
+                    <h4 class="member-name">LANETLI <span>PABLO</span></h4>
+                    <div class="member-role">KARTEL</div>
+                </div>
+
+                <div class="member-card">
+                    <span class="member-rank">Elite</span>
+                    <h4 class="member-name">LANETLI <span>NORA</span></h4>
+                    <div class="member-role">GOLGE</div>
+                </div>
+
+                <div class="member-card">
+                    <span class="member-rank">Veteran</span>
+                    <h4 class="member-name">LANETLI <span>LIGHT</span></h4>
+                    <div class="member-role">ISIK HIZI</div>
+                </div>
+
+                <div class="member-card">
+                    <span class="member-rank">Elite</span>
+                    <h4 class="member-name">LANETLI <span>DEVIL</span></h4>
+                    <div class="member-role">SEYTAN</div>
+                </div>
+
+                <div class="member-card">
+                    <span class="member-rank">Elite</span>
+                    <h4 class="member-name">LANETLI <span>ZENO</span></h4>
+                    <div class="member-role">FILOZOF</div>
+                </div>
+
+                <div class="member-card">
+                    <span class="member-rank">Soldier</span>
+                    <h4 class="member-name">LANETLI <span>K4XN</span></h4>
+                    <div class="member-role">KOD ADI</div>
+                </div>
+
+                <div class="member-card">
+                    <span class="member-rank">Soldier</span>
+                    <h4 class="member-name">LANETLI <span>HEROX</span></h4>
+                    <div class="member-role">KAHRAMAN</div>
+                </div>
+
+                <div class="member-card">
+                    <span class="member-rank">Soldier</span>
+                    <h4 class="member-name">LANETLI <span>OZI</span></h4>
+                    <div class="member-role">SOKUCU</div>
+                </div>
+
+                <div class="member-card">
+                    <span class="member-rank">Soldier</span>
+                    <h4 class="member-name">LANETLI <span>REQUIEM</span></h4>
+                    <div class="member-role">AGIT</div>
+                </div>
+
+                <div class="member-card">
+                    <span class="member-rank">Soldier</span>
+                    <h4 class="member-name">LANETLI <span>WROX</span></h4>
+                    <div class="member-role">KASIRGA</div>
+                </div>
+
+                <div class="member-card">
+                    <span class="member-rank">Soldier</span>
+                    <h4 class="member-name">LANETLI <span>LUXIN</span></h4>
+                    <div class="member-role">ISILTI</div>
+                </div>
+
+                <div class="member-card">
+                    <span class="member-rank">Soldier</span>
+                    <h4 class="member-name">LANETLI <span>REZNOW</span></h4>
+                    <div class="member-role">INTIKAM</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Girls - LANETLI SLAYY (SADECE LAKAP, SOZ YOK) -->
+    <section class="members pink-section pink-theme" id="girls">
+        <div class="members-header reveal">
+            <p class="section-eyebrow" style="color: var(--accent-light);">The Queens</p>
+            <h2 class="members-title" style="background: linear-gradient(180deg, #ff69b4 0%, #ffb6c1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">LANETLI SLAYY</h2>
+            <p class="members-subtitle" style="color: var(--accent-light);">Karanliğin Guzelleri</p>
+        </div>
+
+        <div class="gender-section reveal">
+            <h3 class="gender-title">KIZLAR</h3>
+            <div class="members-grid">
+                <div class="member-card">
+                    <div class="slayy-badge">LANETLI SLAYY</div>
+                    span class="member-rank">Queen</span>
+                    <h4 class="member-name">LANETLI <span>TREXA</span></h4>
+                    <div class="member-role">EFSUN</div>
+                </div>
+
+                <div class="member-card">
+                    <div class="slayy-badge">LANETLI SLAYY</div>
+                    <span class="member-rank">Queen</span>
+                    <h4 class="member-name">LANETLI <span>KARAMEL</span></h4>
+                    <div class="member-role">TATLI ZEHIR</div>
+                </div>
+
+                <div class="member-card">
+                    <div class="slayy-badge">LANETLI SLAYY</div>
+                    <span class="member-rank">Queen</span>
+                    <h4 class="member-name">LANETLI <span>DXMLA</span></h4>
+                    <div class="member-role">DIJITAL KRALICE</div>
+                </div>
+
+                <div class="member-card">
+                    <div class="slayy-badge">LANETLI SLAYY</div>
+                    <span class="member-rank">Queen</span>
+                    <h4 class="member-name">LANETLI <span>MEDOS</span></h4>
+                    <div class="member-role">GIZEM</div>
+                </div>
+
+                <div class="member-card">
+                    <div class="slayy-badge">LANETLI SLAYY</div>
+                    <span class="member-rank">Queen</span>
+                    <h4 class="member-name">LANETLI <span>BAHAR</span></h4>
+                    <div class="member-role">CANLANMA</div>
+                </div>
+
+                <div class="member-card">
+                    <div class="slayy-badge">LANETLI SLAYY</div>
+                    <span class="member-rank">Queen</span>
+                    <h4 class="member-name">LANETLI <span>SILAN</span></h4>
+                    <div class="member-role">SADAKAT</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legacy -->
+    <section class="legacy" id="legacy">
+        <div class="section-header reveal">
+            <p class="section-eyebrow">Miras</p>
+            <h2 class="section-title">Ebedi Iz</h2>
+        </div>
+        <p class="legacy-text reveal">
+            <strong>2016</strong>'da baslayan bu yolculuk, bugun <strong>2026</strong>'da zirvede devam ediyor.
+            On yil icinde buyuk sanalin en korkulan, en saygilan, en lanetli tagi olduk.
+            Ama bu bir son degil, sadece bir baslangic. <strong>LANETLI</strong> ebedi, <strong>LANETLI</strong> sonsuz.
+        </p>
+        <div class="legacy-signature reveal">LANETLI Team</div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer" id="footer">
         <div class="footer-brand">LANE<span>TLI</span></div>
-        <p class="footer-tagline">Karanligin Hukum Surdugu Yer</p>
+        <p class="footer-tagline">Karanliğin Hukum Surdugu Yer</p>
         <div class="footer-links">
             <a href="https://tiktok.com/@lanxtli" target="_blank">@lanxtli</a>
             <a href="https://tiktok.com/@lxnetli" target="_blank">@lxnetli</a>
@@ -1372,18 +1887,16 @@
         let loadProgress = 0;
 
         const loadInterval = setInterval(() => {
-            loadProgress += Math.random() * 10 + 2;
+            loadProgress += Math.random() * 8 + 2;
             if (loadProgress >= 100) {
                 loadProgress = 100;
                 clearInterval(loadInterval);
-                setTimeout(() => {
-                    loader.classList.add('done');
-                }, 800);
+                setTimeout(() => loader.classList.add('done'), 1000);
             }
             loaderPercent.textContent = Math.floor(loadProgress) + '%';
-        }, 120);
+        }, 100);
 
-        // ===== CUSTOM CURSOR =====
+        // ===== CURSOR =====
         const cursor = document.getElementById('cursor');
         const cursorRing = document.getElementById('cursorRing');
         const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
@@ -1395,20 +1908,20 @@
             document.addEventListener('mousemove', (e) => {
                 mouseX = e.clientX;
                 mouseY = e.clientY;
-                cursor.style.left = mouseX - 5 + 'px';
-                cursor.style.top = mouseY - 5 + 'px';
+                cursor.style.left = mouseX - 6 + 'px';
+                cursor.style.top = mouseY - 6 + 'px';
             });
 
             function animateRing() {
                 ringX += (mouseX - ringX) * 0.1;
                 ringY += (mouseY - ringY) * 0.1;
-                cursorRing.style.left = ringX - 22 + 'px';
-                cursorRing.style.top = ringY - 22 + 'px';
+                cursorRing.style.left = ringX - 25 + 'px';
+                cursorRing.style.top = ringY - 25 + 'px';
                 requestAnimationFrame(animateRing);
             }
             animateRing();
 
-            const hoverElements = document.querySelectorAll('a, button, .team-card, .btn, .menu-toggle');
+            const hoverElements = document.querySelectorAll('a, button, .founder-card, .member-card, .social-btn, .stat, .btn, .menu-toggle');
             hoverElements.forEach(el => {
                 el.addEventListener('mouseenter', () => {
                     cursor.classList.add('hover');
@@ -1419,57 +1932,28 @@
                     cursorRing.classList.remove('hover');
                 });
             });
-
-            document.addEventListener('mousedown', () => cursor.classList.add('click'));
-            document.addEventListener('mouseup', () => cursor.classList.remove('click'));
         }
 
-        // ===== MOBILE MENU =====
+        // ===== FULLSCREEN MENU =====
         const menuToggle = document.getElementById('menuToggle');
-        const navMenu = document.getElementById('navMenu');
+        const fullscreenMenu = document.getElementById('fullscreenMenu');
 
         menuToggle.addEventListener('click', () => {
             menuToggle.classList.toggle('active');
-            navMenu.classList.toggle('active');
+            fullscreenMenu.classList.toggle('active');
         });
 
-        navMenu.querySelectorAll('a').forEach(link => {
+        fullscreenMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 menuToggle.classList.remove('active');
-                navMenu.classList.remove('active');
+                fullscreenMenu.classList.remove('active');
             });
         });
 
         // ===== NAV SCROLL =====
         const nav = document.getElementById('nav');
-
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 80) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        // ===== ACTIVE NAV LINK =====
-        const sections = document.querySelectorAll('section[id], footer[id]');
-        const navLinks = document.querySelectorAll('.nav-menu a');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 300) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
+            nav.classList.toggle('scrolled', window.pageYOffset > 80);
         });
 
         // ===== SMOOTH SCROLL =====
@@ -1477,63 +1961,33 @@
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
 
         // ===== SCROLL REVEAL =====
         const revealElements = document.querySelectorAll('.reveal');
-
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('active');
             });
-        }, { 
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        });
+        }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
 
         revealElements.forEach(el => revealObserver.observe(el));
 
-        // ===== PARALLAX =====
-        const heroContent = document.querySelector('.hero-content');
-        const heroGlow = document.querySelector('.hero-glow');
-
-        document.addEventListener('mousemove', (e) => {
-            if (isTouchDevice) return;
-            
-            const x = (e.clientX / window.innerWidth - 0.5) * 30;
-            const y = (e.clientY / window.innerHeight - 0.5) * 30;
-            
-            heroContent.style.transform = `translate(${x}px, ${y}px)`;
-            heroGlow.style.transform = `translate(calc(-50% + ${x * 4}px), calc(-50% + ${y * 4}px))`;
-        });
-
-        // ===== 3D TILT CARDS =====
+        // ===== 3D TILT =====
         const tiltCards = document.querySelectorAll('[data-tilt]');
-
         tiltCards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 if (isTouchDevice) return;
-                
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                
-                const rotateX = (y - centerY) / centerY * -10;
-                const rotateY = (x - centerX) / centerX * 10;
-                
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px)`;
+                const rotateX = (y - centerY) / centerY * -12;
+                const rotateY = (x - centerX) / centerX * 12;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-20px)`;
             });
 
             card.addEventListener('mouseleave', () => {
@@ -1544,10 +1998,9 @@
         // ===== PARTICLES =====
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
-        
         let width, height;
         let particles = [];
-        const particleCount = isTouchDevice ? 20 : 40;
+        const particleCount = isTouchDevice ? 20 : 45;
 
         function resizeCanvas() {
             width = canvas.width = window.innerWidth;
@@ -1568,8 +2021,8 @@
                 this.size = Math.random() * 2.5 + 0.5;
                 this.speedX = (Math.random() - 0.5) * 0.2;
                 this.speedY = (Math.random() - 0.5) * 0.2;
-                this.opacity = Math.random() * 0.25 + 0.08;
-                this.life = Math.random() * 250 + 150;
+                this.opacity = Math.random() * 0.2 + 0.05;
+                this.life = Math.random() * 400 + 200;
                 this.maxLife = this.life;
             }
 
@@ -1577,7 +2030,6 @@
                 this.x += this.speedX;
                 this.y += this.speedY;
                 this.life--;
-
                 if (this.life <= 0 || this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
                     this.reset();
                 }
@@ -1587,7 +2039,7 @@
                 const alpha = (this.life / this.maxLife) * this.opacity;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 26, 26, ${alpha})`;
+                ctx.fillStyle = `rgba(255, 10, 10, ${alpha})`;
                 ctx.fill();
             }
         }
@@ -1602,13 +2054,12 @@
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 180) {
-                        const alpha = (1 - dist / 180) * 0.05;
+                    if (dist < 200) {
+                        const alpha = (1 - dist / 200) * 0.03;
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(255, 26, 26, ${alpha})`;
+                        ctx.strokeStyle = `rgba(255, 10, 10, ${alpha})`;
                         ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }
@@ -1619,27 +2070,22 @@
         let frameCount = 0;
         function animateParticles() {
             ctx.clearRect(0, 0, width, height);
-            
             particles.forEach(p => {
                 p.update();
                 p.draw();
             });
-            
             frameCount++;
-            if (frameCount % 2 === 0) {
-                connectParticles();
-            }
-            
+            if (frameCount % 2 === 0) connectParticles();
             requestAnimationFrame(animateParticles);
         }
 
         animateParticles();
 
         // ===== CONSOLE =====
-        console.log('%c  ☠ LANETLI ☠  ', 'background: #ff1a1a; color: #fff; font-size: 28px; font-family: Orbitron; padding: 14px 28px; border-radius: 4px; font-weight: 900; letter-spacing: 0.3em;');
-        console.log('%cLANETLI TEAM 2026', 'color: #555; font-size: 14px; font-family: Rajdhani; font-weight: 600; letter-spacing: 0.3em;');
-        console.log('%cBu alan lanetlidir. Giren cikamaz...', 'color: #ff1a1a; font-size: 12px; font-style: italic; font-family: Cinzel;');
-        console.log('%c@lanxtli  |  @lxnetli', 'color: #b0b0b0; font-size: 11px; font-family: Orbitron; font-weight: 600;');
+        console.log('%c  ☠ LANETLI ☠  ', 'background: #ff0a0a; color: #fff; font-size: 28px; font-family: Orbitron; padding: 14px 28px; border-radius: 4px; font-weight: 900;');
+        console.log('%cLANETLI TEAM 2026', 'color: #555; font-size: 14px; font-family: Rajdhani; font-weight: 600;');
+        console.log('%cKurucular: LANETLI EMRE & LANETLI TREXA', 'color: #d4af37; font-size: 12px; font-family: Cinzel;');
+        console.log('%c13 Erkek + 6 Kiz = 19 LANETLI Asker', 'color: #ff0a0a; font-size: 11px; font-family: Orbitron;');
     </script>
 </body>
 </html>
