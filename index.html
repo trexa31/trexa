@@ -2,2126 +2,1045 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#050505">
-    <title>LANETLI | The Eternal Curse</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Great+Vibes&family=Sacramento&family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LANETLİ TEAM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         :root {
-            --primary: #010101;
-            --secondary: #030303;
-            --surface: #060606;
-            --surface-elevated: #0a0a0a;
-            --accent: #ff0a0a;
-            --accent-glow: rgba(255, 10, 10, 0.4);
-            --accent-light: #ff3333;
-            --accent-dark: #cc0000;
-            --gold: #d4af37;
-            --gold-glow: rgba(212, 175, 55, 0.3);
-            --text: #ffffff;
-            --text-secondary: #c0c0c0;
-            --text-muted: #444444;
-            --border: #111111;
-            --border-hover: #1a1a1a;
+            --red: #ff003c;
+            --blue: #00f0ff;
+            --purple: #bc13fe;
+            --gold: #ffd700;
+            --dark: #050508;
+            --card: rgba(10, 10, 18, 0.9);
         }
-
-        .pink-theme {
-            --primary: #0a0206;
-            --secondary: #14040e;
-            --surface: #1e0618;
-            --accent: #ff1493;
-            --accent-glow: rgba(255, 20, 147, 0.4);
-            --accent-light: #ff69b4;
-            --accent-dark: #c71585;
-            --gold: #ff69b4;
-            --gold-glow: rgba(255, 105, 180, 0.3);
-            --text: #fff0f5;
-            --text-secondary: #ffb6c1;
-            --text-muted: #8b5a6b;
-            --border: #2d0f1a;
-            --border-hover: #3d1f2a;
-        }
-
-        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-
+        
         body {
-            background: var(--primary);
-            color: var(--text);
-            font-family: 'Rajdhani', 'Montserrat', sans-serif;
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark);
+            color: #fff;
             overflow-x: hidden;
             min-height: 100vh;
-            cursor: none;
+        }
+
+        /* ===== BACKGROUND ===== */
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(188,19,254,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(255,0,60,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(0,240,255,0.06) 0%, transparent 50%),
+                var(--dark);
+        }
+
+        .grid {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background-image: 
+                linear-gradient(rgba(255,0,60,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,0,60,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+        }
+
+        #fireCanvas {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            opacity: 0.4;
+            pointer-events: none;
         }
 
         /* ===== LOADER ===== */
-        .loader {
+        .loader-wrap {
             position: fixed;
             inset: 0;
-            background: var(--primary);
-            z-index: 99999;
+            background: var(--dark);
+            z-index: 9999;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.5s;
+            gap: 30px;
+            transition: opacity 0.8s ease;
         }
-
-        .loader.done { opacity: 0; visibility: hidden; pointer-events: none; }
-
-        .loader-brand {
+        .loader-wrap.done { opacity: 0; pointer-events: none; }
+        
+        .loader-ring {
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--red);
+            animation: spin 1s linear infinite;
+            position: relative;
+        }
+        .loader-ring::before {
+            content: '';
+            position: absolute; inset: 8px;
+            border-radius: 50%; border: 3px solid transparent;
+            border-top-color: var(--blue);
+            animation: spin 1.5s linear infinite reverse;
+        }
+        .loader-ring::after {
+            content: '';
+            position: absolute; inset: 16px;
+            border-radius: 50%; border: 3px solid transparent;
+            border-top-color: var(--purple);
+            animation: spin 2s linear infinite;
+        }
+        
+        .loader-text {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2rem, 6vw, 4rem);
-            font-weight: 900;
-            letter-spacing: 0.8em;
-            color: var(--accent);
-            text-transform: uppercase;
-            animation: loaderGlitch 0.8s steps(2) infinite;
-            position: relative;
+            font-size: 0.8rem;
+            letter-spacing: 6px;
+            color: var(--red);
+            animation: pulse 1.5s ease-in-out infinite;
         }
-
-        .loader-brand::before, .loader-brand::after {
-            content: 'LANETLI';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-        }
-
-        .loader-brand::before {
-            color: #00ff00;
-            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-            transform: translate(-4px, 3px);
-            animation: loaderGlitch1 0.4s infinite;
-        }
-
-        .loader-brand::after {
-            color: #0000ff;
-            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-            transform: translate(4px, -3px);
-            animation: loaderGlitch2 0.4s infinite;
-        }
-
-        @keyframes loaderGlitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-4px, 4px); }
-            40% { transform: translate(4px, -4px); }
-            60% { transform: translate(-4px, -4px); }
-            80% { transform: translate(4px, 4px); }
-            100% { transform: translate(0); }
-        }
-
-        @keyframes loaderGlitch1 { 0%, 100% { transform: translate(-4px, 3px); } 50% { transform: translate(4px, -3px); } }
-        @keyframes loaderGlitch2 { 0%, 100% { transform: translate(4px, -3px); } 50% { transform: translate(-4px, 3px); } }
-
-        .loader-progress {
-            width: min(300px, 70vw);
-            height: 3px;
-            background: var(--border);
-            border-radius: 2px;
-            overflow: hidden;
-            margin-top: 2.5rem;
-            position: relative;
-        }
-
-        .loader-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-dark), var(--accent), var(--accent-light), var(--gold), var(--accent));
-            background-size: 400% 100%;
-            border-radius: 2px;
-            animation: loadProgress 3s cubic-bezier(0.4, 0, 0.2, 1) forwards, shimmer 2s infinite;
-            box-shadow: 0 0 40px var(--accent-glow);
-        }
-
-        @keyframes loadProgress { from { width: 0; } to { width: 100%; } }
-        @keyframes shimmer { 0% { background-position: 400% 0; } 100% { background-position: -400% 0; } }
-
-        .loader-percent {
-            font-family: 'Orbitron', monospace;
-            font-size: 1rem;
-            color: var(--text-muted);
-            margin-top: 1.5rem;
-            letter-spacing: 0.4em;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .loader-status {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            margin-top: 0.75rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-        }
-
-        /* ===== CURSOR ===== */
-        .cursor {
-            width: 12px;
-            height: 12px;
-            background: var(--accent);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 10000;
-            mix-blend-mode: difference;
-            transition: transform 0.1s, width 0.3s, height 0.3s;
-            box-shadow: 0 0 30px var(--accent-glow);
-        }
-
-        .cursor.hover {
-            transform: scale(4);
-            background: transparent;
-            border: 2px solid var(--accent);
-            mix-blend-mode: normal;
-        }
-
-        .cursor.click { transform: scale(0.3); }
-
-        .cursor-ring {
-            width: 50px;
-            height: 50px;
-            border: 1.5px solid rgba(255, 10, 10, 0.15);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.2s, width 0.3s, height 0.3s, border-color 0.3s;
-        }
-
-        .cursor-ring.hover {
-            width: 70px;
-            height: 70px;
-            border-color: rgba(255, 10, 10, 0.4);
-        }
-
-        .pink-theme .cursor { background: var(--accent); box-shadow: 0 0 30px var(--accent-glow); }
-        .pink-theme .cursor-ring { border-color: rgba(255, 20, 147, 0.15); }
-        .pink-theme .cursor-ring.hover { border-color: rgba(255, 20, 147, 0.4); }
-
-        @media (pointer: coarse) {
-            .cursor, .cursor-ring { display: none !important; }
-            body { cursor: auto; }
-        }
+        @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         /* ===== NAV ===== */
-        .nav {
+        nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 1.5rem clamp(1.5rem, 5vw, 4rem);
+            top: 0; width: 100%;
+            padding: 18px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 100;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            background: rgba(5,5,8,0.7);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid rgba(255,0,60,0.15);
+            transition: 0.4s;
         }
-
-        .nav.scrolled {
-            background: rgba(1, 1, 1, 0.95);
-            backdrop-filter: blur(40px) saturate(200%);
-            -webkit-backdrop-filter: blur(40px) saturate(200%);
-            border-bottom: 1px solid var(--border);
-            padding-top: 0.8rem;
-            padding-bottom: 0.8rem;
+        nav.scrolled {
+            background: rgba(5,5,8,0.95);
+            padding: 12px 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
-
-        .pink-theme .nav.scrolled {
-            background: rgba(10, 2, 6, 0.95);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .nav-logo {
+        
+        .logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1rem, 2.2vw, 1.4rem);
+            font-size: 1.6rem;
             font-weight: 900;
-            letter-spacing: 0.4em;
-            color: var(--text);
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .nav-logo span {
-            color: var(--accent);
-            transition: all 0.4s;
-        }
-
-        .nav-logo:hover span {
-            text-shadow: 0 0 30px var(--accent-glow);
-        }
-
-        .menu-toggle {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: none;
-            padding: 0.5rem;
-            z-index: 101;
+            letter-spacing: 4px;
+            color: var(--red);
+            text-shadow: 0 0 20px var(--red), 0 0 40px rgba(255,0,60,0.3);
             position: relative;
         }
-
-        .menu-toggle span {
-            display: block;
-            width: 28px;
-            height: 2px;
-            background: var(--text);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-origin: center;
-        }
-
-        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-        .menu-toggle.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-        /* ===== FULLSCREEN MENU ===== */
-        .fullscreen-menu {
-            position: fixed;
-            inset: 0;
-            background: var(--primary);
-            z-index: 99;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 2.5rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 2rem;
-        }
-
-        .fullscreen-menu.active { opacity: 1; visibility: visible; }
-
-        .fullscreen-menu .menu-label {
-            font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            letter-spacing: 0.6em;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-        }
-
-        .fullscreen-menu a {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            font-weight: 700;
-            color: var(--text);
-            text-decoration: none;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            transition: all 0.4s;
-            position: relative;
-            padding: 1rem 2rem;
-            border: 1px solid transparent;
-        }
-
-        .fullscreen-menu a::after {
+        .logo span { color: var(--blue); text-shadow: 0 0 20px var(--blue); }
+        .logo::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent), var(--gold));
-            transition: width 0.5s;
-            box-shadow: 0 0 20px var(--accent-glow);
+            bottom: -5px; left: 0;
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, var(--red), var(--blue));
+            box-shadow: 0 0 10px var(--red);
         }
 
-        .fullscreen-menu a:hover {
-            color: var(--accent);
-            border-color: var(--border);
-            background: var(--surface);
+        .nav-links { display: flex; gap: 35px; list-style: none; }
+        .nav-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            position: relative;
+            transition: 0.3s;
+            padding: 5px 0;
         }
-
-        .fullscreen-menu a:hover::after { width: 80%; }
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
+            background: var(--red);
+            transition: 0.3s;
+            box-shadow: 0 0 10px var(--red);
+        }
+        .nav-links a:hover { color: #fff; }
+        .nav-links a:hover::before { width: 100%; }
 
         /* ===== HERO ===== */
         .hero {
-            min-height: 100vh;
-            min-height: 100dvh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            position: relative;
-            padding: 2rem;
-            overflow: hidden;
-        }
-
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-        }
-
-        .hero-grid {
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(255,10,10,0.008) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,10,10,0.008) 1px, transparent 1px);
-            background-size: 100px 100px;
-            mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
-            -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
-            animation: gridPulse 10s ease-in-out infinite;
-        }
-
-        @keyframes gridPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-        .hero-glow {
-            position: absolute;
-            width: 1000px;
-            height: 1000px;
-            background: radial-gradient(circle, rgba(255, 10, 10, 0.06) 0%, transparent 55%);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: glowPulse 10s ease-in-out infinite;
-        }
-
-        .pink-theme .hero-glow {
-            background: radial-gradient(circle, rgba(255, 20, 147, 0.08) 0%, transparent 55%);
-        }
-
-        @keyframes glowPulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
-            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.3; }
-        }
-
-        .hero-vignette {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at center, transparent 25%, rgba(0,0,0,0.9) 100%);
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
+            align-items: center;
             text-align: center;
-            max-width: 1200px;
-            width: 100%;
-        }
-
-        .hero-eyebrow {
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            font-weight: 400;
-            letter-spacing: 0.8em;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 2.5rem;
-            opacity: 0;
-            animation: fadeUp 1.2s 0.5s forwards;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        .hero-eyebrow::before, .hero-eyebrow::after {
-            content: '';
-            width: 60px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-        }
-
-        .hero-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(3.5rem, 14vw, 12rem);
-            font-weight: 900;
-            letter-spacing: 0.15em;
-            line-height: 0.9;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-title .char {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(120px) rotateX(-90deg) scale(0.5);
-            animation: charReveal 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            background: linear-gradient(180deg, var(--text) 0%, var(--text-secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 40px rgba(255, 10, 10, 0.2));
-        }
-
-        .hero-title .char:nth-child(1) { animation-delay: 0.6s; }
-        .hero-title .char:nth-child(2) { animation-delay: 0.65s; }
-        .hero-title .char:nth-child(3) { animation-delay: 0.7s; }
-        .hero-title .char:nth-child(4) { animation-delay: 0.75s; }
-        .hero-title .char:nth-child(5) { animation-delay: 0.8s; }
-        .hero-title .char:nth-child(6) { animation-delay: 0.85s; }
-        .hero-title .char:nth-child(7) { animation-delay: 0.9s; }
-
-        .hero-title::after {
-            content: 'LANETLI';
-            position: absolute;
-            top: 0; left: 0; width: 100%;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            letter-spacing: 0.15em;
-            line-height: 0.9;
-            text-transform: uppercase;
-            background: linear-gradient(180deg, var(--accent) 0%, var(--accent-dark) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            opacity: 0;
-            clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
-            transform: translate(-5px, 5px);
-            animation: glitchReveal 0.5s ease 1.5s forwards, glitchLoop 4s ease 2s infinite;
-            filter: drop-shadow(0 0 30px var(--accent-glow));
-        }
-
-        @keyframes glitchReveal { to { opacity: 0.8; } }
-
-        @keyframes glitchLoop {
-            0%, 90%, 100% { opacity: 0.8; transform: translate(-5px, 5px); }
-            92% { opacity: 1; transform: translate(5px, -5px); }
-            94% { opacity: 0.2; transform: translate(-3px, 3px); }
-            96% { opacity: 0.9; transform: translate(3px, -3px); }
-            98% { opacity: 0.4; transform: translate(-5px, -5px); }
-        }
-
-        .hero-subtitle {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1rem, 2.2vw, 1.6rem);
-            font-weight: 400;
-            font-style: italic;
-            letter-spacing: 0.4em;
-            color: var(--text-muted);
-            margin-bottom: 3rem;
-            opacity: 0;
-            animation: fadeUp 1.2s 1.4s forwards;
-        }
-
-        .hero-quote {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(1rem, 2vw, 1.4rem);
-            font-weight: 400;
-            letter-spacing: 0.15em;
-            line-height: 2;
-            color: var(--text-secondary);
-            max-width: 750px;
-            margin: 0 auto 3rem;
-            opacity: 0;
-            animation: fadeUp 1.2s 1.8s forwards;
             position: relative;
-            padding: 2.5rem;
-            border: 1px solid var(--border);
-            background: var(--surface);
+            padding: 0 20px;
         }
 
-        .hero-quote::before {
-            content: '❝';
-            position: absolute;
-            top: -1.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 4rem;
-            color: var(--accent);
-            opacity: 0.2;
-        }
-
-        .hero-cta-group {
-            display: flex;
-            gap: 1.2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeUp 1.2s 2.2s forwards;
-        }
-
-        .btn {
+        .hero-tag {
             display: inline-flex;
             align-items: center;
-            gap: 0.75rem;
-            padding: 1.2rem 2.8rem;
-            font-family: 'Orbitron', sans-serif;
+            gap: 10px;
+            padding: 10px 30px;
+            border: 1px solid rgba(255,0,60,0.4);
+            border-radius: 50px;
             font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.2em;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            text-decoration: none;
+            color: var(--red);
+            margin-bottom: 40px;
+            animation: tagPulse 2.5s ease-in-out infinite;
+            background: rgba(255,0,60,0.05);
+        }
+        .hero-tag i { font-size: 0.6rem; }
+        @keyframes tagPulse {
+            0%,100% { box-shadow: 0 0 15px rgba(255,0,60,0.2); }
+            50% { box-shadow: 0 0 30px rgba(255,0,60,0.5); }
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 6.5rem;
+            font-weight: 900;
+            letter-spacing: 12px;
+            line-height: 1;
+            margin-bottom: 15px;
+        }
+        .hero h1 .l1 { color: var(--red); text-shadow: 0 0 40px var(--red), 0 0 80px rgba(255,0,60,0.4); }
+        .hero h1 .l2 { color: var(--blue); text-shadow: 0 0 40px var(--blue), 0 0 80px rgba(0,240,255,0.4); }
+        
+        .hero-sub {
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+        
+        .hero-line {
+            width: 100px; height: 3px;
+            background: linear-gradient(90deg, var(--red), var(--blue));
+            margin-bottom: 30px;
+            box-shadow: 0 0 20px var(--red);
+        }
+        
+        .hero-desc {
+            max-width: 550px;
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.9;
+            margin-bottom: 50px;
+        }
+
+        .hero-btns { display: flex; gap: 25px; }
+        .btn {
+            padding: 16px 45px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
             border: none;
-            cursor: none;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
             position: relative;
             overflow: hidden;
-            border-radius: 2px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-dark), var(--accent));
-            color: var(--text);
-            border: 1px solid var(--accent);
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
-            transform: translateX(-100%) skewX(-20deg);
-            transition: transform 0.8s;
-        }
-
-        .btn-primary:hover::before { transform: translateX(100%) skewX(-20deg); }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            border-color: var(--accent-light);
-            box-shadow: 0 0 80px var(--accent-glow), 0 15px 50px rgba(255, 10, 10, 0.2);
-            transform: translateY(-4px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text);
-            border: 1.5px solid var(--border);
-            font-family: 'Rajdhani', sans-serif;
+            transition: 0.4s;
             font-weight: 700;
         }
-
-        .btn-secondary:hover {
-            border-color: var(--border-hover);
-            background: var(--surface);
-            box-shadow: 0 0 40px rgba(255,255,255,0.03);
-            transform: translateY(-4px);
-        }
-
-        .btn svg {
-            width: 16px;
-            height: 16px;
-            transition: transform 0.4s;
-        }
-
-        .btn:hover svg { transform: translateX(6px); }
-
-        .scroll-hint {
+        .btn::before {
+            content: '';
             position: absolute;
-            bottom: 3rem;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        .btn:hover::before { left: 100%; }
+        
+        .btn-red {
+            background: var(--red);
+            color: #fff;
+            box-shadow: 0 0 40px rgba(255,0,60,0.4), inset 0 0 20px rgba(255,255,255,0.1);
+            clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+        }
+        .btn-red:hover {
+            box-shadow: 0 0 60px rgba(255,0,60,0.7), inset 0 0 30px rgba(255,255,255,0.15);
+            transform: translateY(-3px) scale(1.02);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--blue);
+            border: 2px solid var(--blue);
+            box-shadow: 0 0 30px rgba(0,240,255,0.15);
+            clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+        }
+        .btn-outline:hover {
+            background: rgba(0,240,255,0.08);
+            box-shadow: 0 0 50px rgba(0,240,255,0.4);
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 50px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.75rem;
-            opacity: 0;
-            animation: fadeUp 1s 2.8s forwards;
-            z-index: 10;
+            gap: 15px;
+            animation: scrollBounce 2s ease-in-out infinite;
+            cursor: pointer;
         }
-
-        .scroll-hint span {
-            font-family: 'Rajdhani', sans-serif;
+        .scroll-down span {
             font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.3em;
-            color: var(--text-muted);
+            letter-spacing: 4px;
             text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
         }
-
-        .scroll-hint-line {
-            width: 1.5px;
-            height: 70px;
-            background: linear-gradient(to bottom, var(--accent), transparent);
+        .scroll-down .arrow {
+            width: 1px; height: 50px;
+            background: linear-gradient(to bottom, var(--red), transparent);
             position: relative;
-            overflow: hidden;
         }
-
-        .scroll-hint-line::after {
+        .scroll-down .arrow::after {
             content: '';
             position: absolute;
-            top: -100%;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent, var(--accent-light), transparent);
-            animation: scrollLineMove 2.5s ease-in-out infinite;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 8px; height: 8px;
+            border-right: 2px solid var(--red);
+            border-bottom: 2px solid var(--red);
+            transform: translateX(-50%) rotate(45deg);
+        }
+        @keyframes scrollBounce {
+            0%,100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(12px); }
         }
 
-        @keyframes scrollLineMove { 0% { top: -100%; } 100% { top: 100%; } }
+        /* ===== SECTIONS ===== */
+        section { padding: 120px 50px; position: relative; }
+        
+        .sec-head {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        .sec-head h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            letter-spacing: 6px;
+            margin-bottom: 15px;
+            display: inline-block;
+            position: relative;
+        }
+        .sec-head h2::after {
+            content: '';
+            position: absolute;
+            bottom: -12px; left: 50%;
+            transform: translateX(-50%);
+            width: 80px; height: 3px;
+            background: linear-gradient(90deg, var(--red), var(--blue));
+            box-shadow: 0 0 20px var(--red);
+        }
+        .sec-head p {
+            color: rgba(255,255,255,0.4);
+            font-size: 1.1rem;
+            margin-top: 30px;
+            letter-spacing: 2px;
+        }
 
-        /* ===== ABOUT ===== */
-        .about {
-            padding: clamp(10rem, 20vh, 15rem) clamp(1.5rem, 5vw, 4rem);
+        /* ===== STATS BAR ===== */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0;
             max-width: 1100px;
             margin: 0 auto;
+            padding: 50px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-
-        .section-header {
+        .stat-cell {
+            flex: 1;
             text-align: center;
-            margin-bottom: clamp(6rem, 12vh, 10rem);
-        }
-
-        .section-eyebrow {
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            font-weight: 400;
-            letter-spacing: 0.6em;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        .section-eyebrow::before, .section-eyebrow::after {
-            content: '';
-            width: 80px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-        }
-
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 900;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            background: linear-gradient(180deg, var(--text) 0%, var(--text-secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .about-content {
-            display: flex;
-            flex-direction: column;
-            gap: 4rem;
-        }
-
-        .about-text {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: clamp(1.2rem, 2.2vw, 1.5rem);
-            font-weight: 400;
-            line-height: 2.2;
-            color: var(--text-secondary);
-            text-align: center;
-        }
-
-        .about-text strong {
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        .about-quote {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.4rem, 2.5vw, 2rem);
-            font-weight: 400;
-            font-style: italic;
-            text-align: center;
-            color: var(--text);
-            letter-spacing: 0.1em;
-            padding: 4rem 3rem;
-            border: 1px solid var(--border);
+            padding: 20px 40px;
+            border-right: 1px solid rgba(255,255,255,0.05);
             position: relative;
-            background: var(--surface);
-            line-height: 1.8;
         }
-
-        .about-quote::before {
-            content: '❝';
+        .stat-cell:last-child { border-right: none; }
+        .stat-cell::before {
+            content: '';
             position: absolute;
-            top: -2rem;
-            left: 50%;
+            top: 0; left: 50%;
             transform: translateX(-50%);
-            font-size: 5rem;
-            color: var(--accent);
-            opacity: 0.15;
+            width: 40px; height: 2px;
+            background: var(--red);
+            box-shadow: 0 0 10px var(--red);
+            opacity: 0;
+            transition: 0.5s;
         }
-
-        .about-timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .timeline-item {
-            display: flex;
-            align-items: center;
-            gap: 2.5rem;
-            padding: 2.5rem;
-            border: 1px solid var(--border);
-            background: var(--surface);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--accent), var(--gold));
-            transform: scaleY(0);
-            transition: transform 0.8s;
-        }
-
-        .timeline-item:hover::before { transform: scaleY(1); }
-
-        .timeline-item:hover {
-            border-color: rgba(255, 10, 10, 0.2);
-            transform: translateX(15px);
-            box-shadow: 0 0 60px rgba(255, 10, 10, 0.05);
-        }
-
-        .timeline-year {
+        .stat-cell:hover::before { opacity: 1; }
+        
+        .stat-num {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             font-weight: 900;
-            color: var(--accent);
-            min-width: 120px;
-            text-shadow: 0 0 20px var(--accent-glow);
+            color: var(--red);
+            text-shadow: 0 0 30px rgba(255,0,60,0.5);
+            line-height: 1;
+            transition: 0.3s;
+        }
+        .stat-cell:hover .stat-num { transform: scale(1.1); }
+        .stat-label {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 12px;
+            font-weight: 500;
         }
 
-        .timeline-text {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-
-        /* ===== FOUNDERS SPECIAL - 3 KURUCU ===== */
-        .founders-special {
-            padding: clamp(10rem, 20vh, 15rem) clamp(1.5rem, 5vw, 4rem);
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
+        /* ===== FOUNDERS ===== */
         .founders-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: clamp(2rem, 4vw, 3rem);
-        }
-
-        @media (max-width: 1200px) {
-            .founders-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 768px) {
-            .founders-grid { grid-template-columns: 1fr; }
+            gap: 35px;
+            max-width: 1300px;
+            margin: 0 auto;
         }
 
         .founder-card {
-            position: relative;
-            background: var(--surface);
-            border: 1px solid var(--border);
+            background: var(--card);
+            border: 1px solid rgba(255,255,255,0.04);
             border-radius: 24px;
-            padding: clamp(2.5rem, 5vw, 4rem);
+            padding: 50px 35px;
+            position: relative;
             overflow: hidden;
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(20px);
         }
-
         .founder-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--gold), transparent);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--red), var(--purple), var(--blue));
+            opacity: 0;
+            transition: 0.5s;
+        }
+        .founder-card:hover::before { opacity: 1; }
+        .founder-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: rgba(255,0,60,0.2);
+            box-shadow: 
+                0 30px 80px rgba(255,0,60,0.1),
+                0 0 0 1px rgba(255,0,60,0.1);
         }
 
-        .founder-card::after {
+        .founder-avatar-wrap {
+            position: relative;
+            width: 110px; height: 110px;
+            margin-bottom: 25px;
+        }
+        .founder-avatar {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--red), var(--purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            box-shadow: 0 0 40px rgba(255,0,60,0.3);
+            position: relative;
+            z-index: 2;
+        }
+        .founder-avatar-ring {
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: var(--blue);
+            border-right-color: var(--blue);
+            animation: spin 4s linear infinite;
+            z-index: 1;
+        }
+        .founder-avatar-ring::before {
             content: '';
             position: absolute;
-            inset: 0;
-            border-radius: 24px;
-            padding: 1.5px;
-            background: linear-gradient(135deg, rgba(255, 10, 10, 0.2), transparent 40%, transparent 60%, rgba(212, 175, 55, 0.1));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.8s;
-            pointer-events: none;
-        }
-
-        .founder-card:hover::before { transform: scaleX(1); }
-        .founder-card:hover::after { opacity: 1; }
-
-        .founder-card:hover {
-            border-color: rgba(255, 10, 10, 0.15);
-            transform: translateY(-20px) scale(1.02);
-            box-shadow: 0 50px 120px rgba(0, 0, 0, 0.6), 0 0 150px rgba(255, 10, 10, 0.1);
-        }
-
-        .founder-glow {
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255, 10, 10, 0.06) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.8s;
-            pointer-events: none;
-        }
-
-        .founder-card:hover .founder-glow { opacity: 1; }
-
-        .founder-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 2rem;
-        }
-
-        .founder-number {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(3rem, 6vw, 5rem);
-            font-weight: 900;
-            color: rgba(255, 10, 10, 0.05);
-            line-height: 1;
-            transition: all 0.5s;
-        }
-
-        .founder-card:hover .founder-number {
-            color: rgba(255, 10, 10, 0.12);
-            text-shadow: 0 0 60px rgba(255, 10, 10, 0.2);
-        }
-
-        .founder-crown {
-            font-size: 2rem;
-            filter: drop-shadow(0 0 20px var(--gold-glow));
-            animation: crownFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes crownFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            inset: 4px;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            border-bottom-color: var(--red);
+            border-left-color: var(--red);
+            animation: spin 3s linear infinite reverse;
         }
 
         .founder-name {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.5rem, 3vw, 2.2rem);
-            font-weight: 900;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-            line-height: 1.2;
-        }
-
-        .founder-name span {
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transition: all 0.5s;
-        }
-
-        .founder-card:hover .founder-name span {
-            background: linear-gradient(135deg, var(--accent-light), var(--gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 30px var(--accent-glow));
-        }
-
-        .founder-title {
-            font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
-            font-weight: 400;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 2rem;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 10px;
         }
-
-        .founder-title::before {
-            content: '';
-            width: 30px;
-            height: 1px;
-            background: var(--gold);
-        }
-
-        .founder-divider {
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, var(--border), transparent);
-            margin-bottom: 2rem;
-        }
-
-        .founder-quote {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1rem, 1.8vw, 1.2rem);
-            font-style: italic;
-            line-height: 2;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            position: relative;
-            padding-left: 1.5rem;
-            border-left: 3px solid var(--accent);
-            transition: all 0.5s;
-        }
-
-        .founder-card:hover .founder-quote {
-            color: var(--text);
-            border-left-color: var(--gold);
-        }
-
-        .founder-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat {
-            text-align: center;
-            padding: 1rem;
-            background: var(--secondary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            transition: all 0.4s;
-        }
-
-        .stat:hover {
-            border-color: var(--accent);
-            box-shadow: 0 0 25px var(--accent-glow);
-            transform: translateY(-5px);
-        }
-
-        .stat-value {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 20px var(--accent-glow);
-        }
-
-        .stat-label {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-        }
-
-        .founder-social {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 1.5rem;
-            background: transparent;
-            border: 1.5px solid var(--border);
-            border-radius: 12px;
-            color: var(--text);
-            text-decoration: none;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            flex: 1;
-            justify-content: center;
-        }
-
-        .social-btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: -1;
-        }
-
-        .social-btn:hover::before { transform: scaleX(1); }
-
-        .social-btn:hover {
-            border-color: var(--accent);
-            color: var(--text);
-            box-shadow: 0 0 40px var(--accent-glow);
-            transform: translateX(8px);
-        }
-
-        .social-btn svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-            transition: transform 0.4s;
-        }
-
-        .social-btn:hover svg { transform: scale(1.3) rotate(-8deg); }
-
-        /* ===== MEMBERS SECTION ===== */
-        .members {
-            padding: clamp(10rem, 20vh, 15rem) clamp(1.5rem, 5vw, 4rem);
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .members-header {
-            text-align: center;
-            margin-bottom: clamp(6rem, 12vh, 10rem);
-        }
-
-        .members-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 900;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            background: linear-gradient(180deg, var(--text) 0%, var(--text-secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-        }
-
-        .members-subtitle {
-            font-family: 'Cinzel', serif;
+        .verified {
+            color: #0095f6;
             font-size: 1.1rem;
-            font-style: italic;
-            color: var(--text-muted);
-            letter-spacing: 0.3em;
+            filter: drop-shadow(0 0 5px #0095f6);
+            animation: verifyPulse 2s ease-in-out infinite;
+        }
+        @keyframes verifyPulse {
+            0%,100% { filter: drop-shadow(0 0 5px #0095f6); }
+            50% { filter: drop-shadow(0 0 15px #0095f6); }
         }
 
-        .gender-section {
-            margin-bottom: 8rem;
-        }
-
-        .gender-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.8rem, 4vw, 3rem);
-            font-weight: 900;
-            letter-spacing: 0.2em;
+        .founder-role {
+            color: var(--red);
+            font-size: 0.85rem;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            margin-bottom: 4rem;
-            padding-bottom: 2rem;
-            border-bottom: 2px solid var(--border);
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(255,0,60,0.08);
+            border-radius: 20px;
+            border: 1px solid rgba(255,0,60,0.15);
+        }
+
+        .founder-desc {
+            color: rgba(255,255,255,0.45);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .founder-quote-box {
+            background: linear-gradient(135deg, rgba(255,0,60,0.05), rgba(0,240,255,0.03));
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 25px 20px;
+            position: relative;
+            margin-bottom: 25px;
+        }
+        .founder-quote-box::before {
+            content: '"';
+            position: absolute;
+            top: -5px; left: 18px;
+            font-size: 3.5rem;
+            color: var(--red);
+            font-family: Georgia, serif;
+            line-height: 1;
+            opacity: 0.6;
+        }
+        .founder-quote-box p {
+            color: rgba(255,255,255,0.75);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            font-style: italic;
+            padding-left: 10px;
+        }
+
+        .founder-rank {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 8px;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 600;
         }
+        .founder-rank i { color: var(--gold); }
 
-        .gender-title::before {
-            content: '';
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--gold));
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-
-        .members-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .member-card {
-            background: var(--surface);
-            border: 1.5px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
+        /* ===== PHILOSOPHY ===== */
+        .philosophy {
+            background: linear-gradient(180deg, var(--dark) 0%, rgba(15,5,15,0.8) 50%, var(--dark) 100%);
             position: relative;
             overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: none;
-            text-align: center;
         }
-
-        .member-card::before {
+        .philosophy::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light), transparent);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.8s;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,0,60,0.03) 0%, transparent 60%);
         }
 
-        .member-card:hover::before { transform: scaleX(1); }
-
-        .member-card:hover {
-            border-color: rgba(255, 10, 10, 0.2);
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 60px rgba(255, 10, 10, 0.08);
+        .phil-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
-        .member-rank {
+        .phil-card {
+            background: linear-gradient(135deg, rgba(255,0,60,0.04), rgba(0,240,255,0.02));
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            transition: 0.5s;
+            backdrop-filter: blur(10px);
+        }
+        .phil-card:hover {
+            border-color: rgba(255,0,60,0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        .phil-card .num {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.65rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--accent);
-            padding: 0.4rem 1.2rem;
-            border: 1.5px solid var(--accent);
-            border-radius: 4px;
-            background: rgba(255, 10, 10, 0.05);
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            transition: all 0.4s;
-        }
-
-        .member-card:hover .member-rank {
-            background: rgba(255, 10, 10, 0.1);
-            box-shadow: 0 0 15px var(--accent-glow);
-        }
-
-        .member-name {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
+            font-size: 3rem;
             font-weight: 900;
-            letter-spacing: 0.08em;
+            color: rgba(255,0,60,0.15);
+            position: absolute;
+            top: 15px; right: 25px;
+            line-height: 1;
+        }
+        .phil-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            color: var(--red);
+            margin-bottom: 15px;
             text-transform: uppercase;
-            margin-bottom: 0.75rem;
-            color: var(--text);
+        }
+        .phil-card p {
+            color: rgba(255,255,255,0.55);
+            font-size: 1rem;
+            line-height: 1.8;
         }
 
-        .member-name span {
-            color: var(--accent);
-            transition: all 0.4s;
-        }
-
-        .member-card:hover .member-name span {
-            text-shadow: 0 0 30px var(--accent-glow);
-        }
-
-        .member-role {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--gold);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-        }
-
-        .member-role::before {
-            content: '◆';
-            color: var(--accent);
-            font-size: 0.6rem;
-        }
-
-        /* ===== PINK THEME MEMBERS ===== */
-        .pink-section {
-            background: linear-gradient(180deg, var(--primary) 0%, #1a0510 50%, var(--primary) 100%);
+        /* ===== POWER ===== */
+        .power-section {
+            text-align: center;
             position: relative;
         }
-
-        .pink-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image:
-                radial-gradient(circle at 20% 50%, rgba(255, 20, 147, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 50%, rgba(255, 105, 180, 0.02) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .pink-section .gender-title {
-            color: var(--accent-light);
-        }
-
-        .pink-section .gender-title::before {
-            background: linear-gradient(90deg, var(--accent), var(--accent-light));
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-
-        .pink-section .member-card {
-            background: linear-gradient(135deg, #1a0510, #240818);
-            border-color: rgba(255, 20, 147, 0.15);
-        }
-
-        .pink-section .member-card:hover {
-            border-color: rgba(255, 20, 147, 0.3);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 80px rgba(255, 20, 147, 0.1);
-        }
-
-        .pink-section .member-rank {
-            color: var(--accent);
-            border-color: var(--accent);
-            background: rgba(255, 20, 147, 0.08);
-        }
-
-        .pink-section .member-role {
-            color: var(--accent-light);
-        }
-
-        .pink-section .member-role::before {
-            color: var(--accent);
-        }
-
-        .slayy-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'Sacramento', cursive;
-            font-size: 1.4rem;
-            color: var(--accent-light);
-            margin-bottom: 1rem;
-        }
-
-        .slayy-badge::before {
-            content: '✦';
-            font-size: 1rem;
-        }
-
-        /* ===== LEGACY ===== */
-        .legacy {
-            padding: clamp(10rem, 20vh, 15rem) clamp(1.5rem, 5vw, 4rem);
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .legacy-title {
+        .power-text {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: 3rem;
             font-weight: 900;
-            letter-spacing: 0.15em;
+            letter-spacing: 8px;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255,0,60,0.5);
             text-transform: uppercase;
-            margin-bottom: 3rem;
+            margin-bottom: 40px;
+            animation: powerGlow 3s ease-in-out infinite;
         }
-
-        .legacy-text {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: clamp(1.2rem, 2.2vw, 1.5rem);
-            font-weight: 400;
-            line-height: 2.4;
-            color: var(--text-secondary);
-            margin-bottom: 4rem;
+        @keyframes powerGlow {
+            0%,100% { -webkit-text-stroke: 1px rgba(255,0,60,0.3); text-shadow: 0 0 20px rgba(255,0,60,0.1); }
+            50% { -webkit-text-stroke: 1px rgba(255,0,60,0.8); text-shadow: 0 0 40px rgba(255,0,60,0.3); }
         }
-
-        .legacy-text strong {
-            color: var(--accent);
-            font-weight: 600;
+        .power-sub {
+            max-width: 700px;
+            margin: 0 auto;
+            color: rgba(255,255,255,0.4);
+            font-size: 1.1rem;
+            line-height: 2;
         }
-
-        .legacy-signature {
-            font-family: 'Great Vibes', cursive;
-            font-size: 4rem;
-            color: var(--gold);
-            margin-top: 2rem;
-            opacity: 0.9;
-        }
+        .power-sub strong { color: var(--red); }
 
         /* ===== FOOTER ===== */
-        .footer {
-            padding: clamp(6rem, 12vh, 10rem) clamp(1.5rem, 5vw, 4rem);
-            border-top: 1px solid var(--border);
+        footer {
+            background: rgba(3,3,6,0.95);
+            border-top: 1px solid rgba(255,0,60,0.08);
+            padding: 80px 50px 30px;
             text-align: center;
             position: relative;
         }
-
-        .footer::before {
+        footer::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 50%;
+            top: -1px; left: 50%;
             transform: translateX(-50%);
-            width: 500px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), var(--gold), transparent);
+            width: 200px; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--red), transparent);
+            box-shadow: 0 0 20px var(--red);
         }
-
-        .footer-brand {
+        .footer-logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-size: 2.5rem;
             font-weight: 900;
-            letter-spacing: 0.5em;
+            color: var(--red);
+            text-shadow: 0 0 30px var(--red);
+            letter-spacing: 6px;
+            margin-bottom: 20px;
+        }
+        .footer-line {
+            width: 60px; height: 2px;
+            background: var(--blue);
+            margin: 0 auto 25px;
+            box-shadow: 0 0 15px var(--blue);
+        }
+        .footer-text {
+            color: rgba(255,255,255,0.3);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto 40px;
+            line-height: 1.9;
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.03);
+            padding-top: 25px;
+            color: rgba(255,255,255,0.15);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            margin-bottom: 1.5rem;
         }
 
-        .footer-brand span {
-            color: var(--accent);
-            animation: brandGlow 4s ease-in-out infinite;
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .founders-grid { grid-template-columns: repeat(2, 1fr); }
+            .phil-grid { grid-template-columns: 1fr; }
         }
-
-        @keyframes brandGlow {
-            0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 10, 10, 0.3)); }
-            50% { filter: drop-shadow(0 0 60px rgba(255, 10, 10, 0.6)); }
-        }
-
-        .footer-tagline {
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            font-style: italic;
-            color: var(--text-muted);
-            letter-spacing: 0.4em;
-            margin-bottom: 3rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-decoration: none;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            transition: all 0.4s;
-            position: relative;
-            padding: 0.5rem 0;
-        }
-
-        .footer-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1.5px;
-            background: var(--accent);
-            transition: width 0.4s;
-            box-shadow: 0 0 10px var(--accent-glow);
-        }
-
-        .footer-links a:hover {
-            color: var(--accent);
-        }
-
-        .footer-links a:hover::after {
-            width: 100%;
-        }
-
-        .footer-copy {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            letter-spacing: 0.25em;
-            opacity: 0.5;
-        }
-
-        /* ===== ANIMATIONS ===== */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes charReveal {
-            from { opacity: 0; transform: translateY(120px) rotateX(-90deg) scale(0.5); }
-            to { opacity: 1; transform: translateY(0) rotateX(0) scale(1); }
-        }
-
-        /* ===== SCROLL REVEAL ===== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(80px) scale(0.9);
-            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .reveal-delay-1 { transition-delay: 0.2s; }
-        .reveal-delay-2 { transition-delay: 0.4s; }
-        .reveal-delay-3 { transition-delay: 0.6s; }
-
-        /* ===== PARTICLES ===== */
-        #particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; letter-spacing: 6px; }
+            .founders-grid { grid-template-columns: 1fr; }
+            .stats-bar { flex-wrap: wrap; }
+            .stat-cell { flex: 0 0 50%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+            nav { padding: 15px 20px; }
+            .nav-links { display: none; }
+            section { padding: 80px 20px; }
+            .power-text { font-size: 1.8rem; }
         }
 
         /* ===== SCROLLBAR ===== */
-        ::-webkit-scrollbar { width: 3px; }
-        ::-webkit-scrollbar-track { background: var(--primary); }
-        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--purple); }
 
-        /* ===== SELECTION ===== */
-        ::selection {
-            background: var(--accent);
-            color: var(--text);
+        /* ===== ANIMATIONS ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
-
-        /* ===== REDUCED MOTION ===== */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* ===== LANDSCAPE MOBILE ===== */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .hero { min-height: auto; padding-top: 10rem; padding-bottom: 6rem; }
-            .scroll-hint { display: none; }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <!-- Loader -->
-    <div class="loader" id="loader">
-        <div class="loader-brand">LANETLI</div>
-        <div class="loader-progress">
-            <div class="loader-progress-bar"></div>
-        </div>
-        <div class="loader-percent" id="loaderPercent">0%</div>
-        <div class="loader-status">Sistem Yukleniyor...</div>
+
+    <!-- LOADER -->
+    <div class="loader-wrap" id="loader">
+        <div class="loader-ring"></div>
+        <div class="loader-text">YÜKLENİYOR</div>
     </div>
 
-    <!-- Cursor -->
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
+    <!-- BACKGROUND -->
+    <div class="bg"></div>
+    <div class="grid"></div>
+    <canvas id="fireCanvas"></canvas>
 
-    <!-- Particles -->
-    <canvas id="particles"></canvas>
-
-    <!-- Nav -->
-    <nav class="nav" id="nav">
-        <a href="#" class="nav-logo">LANE<span>TLI</span></a>
-        <button class="menu-toggle" id="menuToggle" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+    <!-- NAV -->
+    <nav id="navbar">
+        <div class="logo">LANETLİ<span>TEAM</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Ana Sayfa</a></li>
+            <li><a href="#founders">Kurucular</a></li>
+            <li><a href="#philosophy">Felsefe</a></li>
+            <li><a href="#power">Güç</a></li>
+        </ul>
     </nav>
 
-    <!-- Fullscreen Menu -->
-    <div class="fullscreen-menu" id="fullscreenMenu">
-        <div class="menu-label">Navigasyon</div>
-        <a href="#home">Ana Sayfa</a>
-        <a href="#about">Hakkimizda</a>
-        <a href="#founders">Kurucular</a>
-        <a href="#members">Erkekler</a>
-        <a href="#girls">LANETLI Slayy</a>
-        <a href="#footer">Iletisim</a>
-    </div>
-
-    <!-- Hero -->
+    <!-- HERO -->
     <section class="hero" id="home">
-        <div class="hero-bg">
-            <div class="hero-grid"></div>
-            <div class="hero-glow"></div>
-            <div class="hero-vignette"></div>
+        <div class="hero-tag">
+            <i class="fas fa-bolt"></i>
+            Dünyanın En Lanetli Ekibi
+            <i class="fas fa-bolt"></i>
         </div>
-
-        <div class="hero-content">
-            <p class="hero-eyebrow">The Eternal Curse</p>
-            <h1 class="hero-title">
-                <span class="char">L</span>
-                <span class="char">A</span>
-                <span class="char">N</span>
-                <span class="char">E</span>
-                <span class="char">T</span>
-                <span class="char">L</span>
-                <span class="char">I</span>
-            </h1>
-            <p class="hero-subtitle">Karanliğin Hukum Surdugu Yer</p>
-            <div class="hero-quote">
-                "2016'dan beri ayakta duruyoruz. Cunku biz LANETLI'yiz. Duseriz ama kalkmayi biliriz. Yeniliriz ama pes etmeyi bilmeriz."
-            </div>
-            <div class="hero-cta-group">
-                <a href="#about" class="btn btn-primary">
-                    Hakkimizda
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </a>
-                <a href="#members" class="btn btn-secondary">
-                    Uyeler
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                        <circle cx="9" cy="7" r="4"/>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
-
-        <div class="scroll-hint">
-            <span>Asagi Kaydir</span>
-            <div class="scroll-hint-line"></div>
-        </div>
-    </section>
-
-    <!-- About -->
-    <section class="about" id="about">
-        <div class="section-header reveal">
-            <p class="section-eyebrow">Tarihce</p>
-            <h2 class="section-title">Hakkimizda</h2>
-        </div>
-
-        <div class="about-content">
-            <p class="about-text reveal">
-                Sanal dunyanin derinliklerinde, <strong>2016</strong> yilinda atilan ilk adimla basladi her sey.
-                O gunlerde sadece bir hayaldi <strong>LANETLI</strong>. Bugun ise buyuk sanalin en tasakli,
-                en korkusuz, en lanetli tagi olarak hukum suruyoruz.
-            </p>
-
-            <div class="about-quote reveal">
-                "Karanlikta yuruyenler, gun isiginda hukum surer. Biz LANETLI'yiz,
-                biz yenilmeziiz, biz sonsuzuz."
-            </div>
-
-            <div class="about-timeline reveal">
-                <div class="timeline-item">
-                    <div class="timeline-year">2016</div>
-                    <div class="timeline-text">Sanalin derinliklerinde ilk adimlar atildi. LANETLI ruyasi basladi.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2018</div>
-                    <div class="timeline-text">Ilk buyuk zaferler. Rakipler tanidi, LANETLI korkusu yayildi.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2020</div>
-                    <div class="timeline-text">Daha da guclendik. Yeni uyeler, yeni zaferler, yeni efsaneler.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2024</div>
-                    <div class="timeline-text">Buyuk sanalin en tasakli tagi olduk. Herkes LANETLI diyor.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2026</div>
-                    <div class="timeline-text">Bugun. Zirvedeyiz ve daha yuksege cikiyoruz. LANETLI ebedi!</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Founders - 3 KURUCU (TREXA, EMRE, PABLO) + TONY MONTANA SOZLERI -->
-    <section class="founders-special" id="founders">
-        <div class="section-header reveal">
-            <p class="section-eyebrow">The Architects</p>
-            <h2 class="section-title">Kurucular</h2>
-        </div>
-
-        <div class="founders-grid">
-            <!-- 1. TREXA -->
-            <article class="founder-card reveal" data-tilt>
-                <div class="founder-glow"></div>
-                <div class="founder-header">
-                    <span class="founder-number">01</span>
-                    <span class="founder-crown">👑</span>
-                </div>
-                <h3 class="founder-name">LANETLI <span>TREXA</span></h3>
-                <div class="founder-title">Kurucu & Stratejist</div>
-                <div class="founder-divider"></div>
-                <p class="founder-quote">
-                    "Dunya senin elinde olmali, yoksa hicbir sey olmaz. Benim dunyam, benim kurallarim, benim lanetim. Kimse bana ne yapacagimi soyleyemez, cunku ben bu oyunu baslatanim."
-                </p>
-                <div class="founder-stats">
-                    <div class="stat">
-                        <div class="stat-value">2016</div>
-                        <div class="stat-label">Baslangic</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">∞</div>
-                        <div class="stat-label">Guc</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">01</div>
-                        <div class="stat-label">Kurucu</div>
-                    </div>
-                </div>
-                <div class="founder-social">
-                    <a href="https://tiktok.com/@lxnetli" target="_blank" class="social-btn">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.88-2.89 2.89 2.89 0 0 1 2.88-2.89c.3 0 .59.05.86.13V9.4a6.35 6.35 0 0 0-.86-.06A6.36 6.36 0 0 0 2 15.71a6.36 6.36 0 0 0 6.37 6.36 6.36 6.36 0 0 0 6.37-6.36V7.73a8.16 8.16 0 0 0 4.85 1.58V6.02z"/>
-                        </svg>
-                        @lxnetli
-                    </a>
-                </div>
-            </article>
-
-            <!-- 2. EMRE -->
-            <article class="founder-card reveal reveal-delay-1" data-tilt>
-                <div class="founder-glow"></div>
-                <div class="founder-header">
-                    <span class="founder-number">02</span>
-                    <span class="founder-crown">👑</span>
-                </div>
-                <h3 class="founder-name">LANETLI <span>EMRE</span></h3>
-                <div class="founder-title">Kurucu & Vizyoner</div>
-                <div class="founder-divider"></div>
-                <p class="founder-quote">
-                    "Her zaman bir adim onde olacaksin. Dusmanin ne yapacagini bilmeden, sen onun ne yapacagini bilmelisin. Guc, sadakatin uzerine kurulur. Sadakatsizlik, olumle cezalandirilir."
-                </p>
-                <div class="founder-stats">
-                    <div class="stat">
-                        <div class="stat-value">2016</div>
-                        <div class="stat-label">Baslangic</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">∞</div>
-                        <div class="stat-label">Guc</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">02</div>
-                        <div class="stat-label">Kurucu</div>
-                    </div>
-                </div>
-                <div class="founder-social">
-                    <a href="https://tiktok.com/@lanxtli" target="_blank" class="social-btn">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.88-2.89 2.89 2.89 0 0 1 2.88-2.89c.3 0 .59.05.86.13V9.4a6.35 6.35 0 0 0-.86-.06A6.36 6.36 0 0 0 2 15.71a6.36 6.36 0 0 0 6.37 6.36 6.36 6.36 0 0 0 6.37-6.36V7.73a8.16 8.16 0 0 0 4.85 1.58V6.02z"/>
-                        </svg>
-                        @lanxtli
-                    </a>
-                </div>
-            </article>
-
-            <!-- 3. PABLO - YENI KURUCU -->
-            <article class="founder-card reveal reveal-delay-2" data-tilt>
-                <div class="founder-glow"></div>
-                <div class="founder-header">
-                    <span class="founder-number">03</span>
-                    <span class="founder-crown">👑</span>
-                </div>
-                <h3 class="founder-name">LANETLI <span>PABLO</span></h3>
-                <div class="founder-title">Kurucu & Kartel</div>
-                <div class="founder-divider"></div>
-                <p class="founder-quote">
-                    "Ilk once parayi alirsin, sonra gucu, sonra da her sey. Ama unutma, sadik adamlar olmadan hicbir sey olmaz. Ben sadik adamlarla basladim, sadik adamlarla yukseldim. LANETLI, benim ailem, benim kanım."
-                </p>
-                <div class="founder-stats">
-                    <div class="stat">
-                        <div class="stat-value">2016</div>
-                        <div class="stat-label">Baslangic</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">∞</div>
-                        <div class="stat-label">Guc</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">03</div>
-                        <div class="stat-label">Kurucu</div>
-                    </div>
-                </div>
-                <div class="founder-social">
-                    <a href="https://tiktok.com/@pabloo7xqa" target="_blank" class="social-btn">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.88-2.89 2.89 2.89 0 0 1 2.88-2.89c.3 0 .59.05.86.13V9.4a6.35 6.35 0 0 0-.86-.06A6.36 6.36 0 0 0 2 15.71a6.36 6.36 0 0 0 6.37 6.36 6.36 6.36 0 0 0 6.37-6.36V7.73a8.16 8.16 0 0 0 4.85 1.58V6.02z"/>
-                        </svg>
-                        @pabloo7xqa
-                    </a>
-                </div>
-            </article>
-        </div>
-    </section>
-
-    <!-- Members - ERKEKLER (12 - PABLO cikti, SADECE LAKAP) -->
-    <section class="members" id="members">
-        <div class="members-header reveal">
-            <p class="section-eyebrow">The Brotherhood</p>
-            <h2 class="members-title">LANETLI TEAM</h2>
-            <p class="members-subtitle">Karanliğin Asil Evlatlari</p>
-        </div>
-
-        <div class="gender-section reveal">
-            <h3 class="gender-title">ERKEKLER</h3>
-            <div class="members-grid">
-                <div class="member-card">
-                    <span class="member-rank">Veteran</span>
-                    <h4 class="member-name">LANETLI <span>ARDA</span></h4>
-                    <div class="member-role">YIKILMAZ</div>
-                </div>
-
-                <div class="member-card">
-                    <span class="member-rank">Elite</span>
-                    <h4 class="member-name">LANETLI <span>NORA</span></h4>
-                    <div class="member-role">GOLGE</div>
-                </div>
-
-                <div class="member-card">
-                    <span class="member-rank">Veteran</span>
-                    <h4 class="member-name">LANETLI <span>LIGHT</span></h4>
-                    <div class="member-role">ISIK HIZI</div>
-                </div>
-
-                <div class="member-card">
-                    <span class="member-rank">Elite</span>
-                    <h4 class="member-name">LANETLI <span>DEVIL</span></h4>
-                    <div class="member-role">SEYTAN</div>
-                </div>
-
-                <div class="member-card">
-                    <span class="member-rank">Elite</span>
-                    <h4 class="member-name">LANETLI <span>ZENO</span></h4>
-                    <div class="member-role">FILOZOF</div>
-                </div>
-
-                <div class="member-card">
-                    <span class="member-rank">Soldier</span>
-                    <h4 class="member-name">LANETLI <span>K4XN</span></h4>
-                    <div class="member-role">KOD ADI</div>
-                </div>
-
-                <div class="member-card">
-                    <span class="member-rank">Soldier</span>
-                    <h4 class="member-name">LANETLI <span>HEROX</span></h4>
-                    <div class="member-role">KAHRAMAN</div>
-                </div>
-
-                <div class="member-card">
-                    <span class="member-rank">Soldier</span>
-                    <h4 class="member-name">LANETLI <span>OZI</span></h4>
-                    <div class="member-role">SOKUCU</div>
-                </div>
-
-                <div class="member-card">
-                    <span class="member-rank">Soldier</span>
-                    <h4 class="member-name">LANETLI <span>REQUIEM</span></h4>
-                    <div class="member-role">AGIT</div>
-                </div>
-
-                <div class="member-card">
-                    <span class="member-rank">Soldier</span>
-                    <h4 class="member-name">LANETLI <span>WROX</span></h4>
-                    <div class="member-role">KASIRGA</div>
-                </div>
-
-                <div class="member-card">
-                    <span class="member-rank">Soldier</span>
-                    <h4 class="member-name">LANETLI <span>LUXIN</span></h4>
-                    <div class="member-role">ISILTI</div>
-                </div>
-
-                <div class="member-card">
-                    <span class="member-rank">Soldier</span>
-                    <h4 class="member-name">LANETLI <span>REZNOW</span></h4>
-                    <div class="member-role">INTIKAM</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Girls - LANETLI SLAYY (6 - SADECE LAKAP) -->
-    <section class="members pink-section pink-theme" id="girls">
-        <div class="members-header reveal">
-            <p class="section-eyebrow" style="color: var(--accent-light);">The Queens</p>
-            <h2 class="members-title" style="background: linear-gradient(180deg, #ff69b4 0%, #ffb6c1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">LANETLI SLAYY</h2>
-            <p class="members-subtitle" style="color: var(--accent-light);">Karanliğin Guzelleri</p>
-        </div>
-
-        <div class="gender-section reveal">
-            <h3 class="gender-title">KIZLAR</h3>
-            <div class="members-grid">
-                <div class="member-card">
-                    <div class="slayy-badge">LANETLI SLAYY</div>
-                    <span class="member-rank">Queen</span>
-                    <h4 class="member-name">LANETLI <span> Z </span></h4>
-                    <div class="member-role"></div>
-                </div>
-
-                <div class="member-card">
-                    <div class="slayy-badge">LANETLI SLAYY</div>
-                    <span class="member-rank">Queen </span>
-                    <h4 class="member-name">LANETLI <span>KARAMEL</span></h4>
-                    <div class="member-role">TATLI KIZ</div>
-                </div>
-
-                <div class="member-card">
-                    <div class="slayy-badge">LANETLI SLAYY</div>
-                    <span class="member-rank">Queen</span>
-                    <h4 class="member-name">LANETLI <span>DXMLA</span></h4>
-                    <div class="member-role">BABY</div>
-                </div>
-
-                <div class="member-card">
-                    <div class="slayy-badge">LANETLI SLAYY</div>
-                    <span class="member-rank">Queen</span>
-                    <h4 class="member-name">LANETLI <span>MEDOS</span></h4>
-                    <div class="member-role">GUZELLIK</div>
-                </div>
-
-                <div class="member-card">
-                    <div class="slayy-badge">LANETLI SLAYY</div>
-                    <span class="member-rank">Queen</span>
-                    <h4 class="member-name">LANETLI <span>BAHAR</span></h4>
-                    <div class="member-role">KRALİCE</div>
-                </div>
-
-                <div class="member-card">
-                    <div class="slayy-badge">LANETLI SLAYY</div>
-                    <span class="member-rank">Queen</span>
-                    <h4 class="member-name">LANETLI <span>SILAN</span></h4>
-                    <div class="member-role">PRENSES</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Legacy -->
-    <section class="legacy" id="legacy">
-        <div class="section-header reveal">
-            <p class="section-eyebrow">Miras</p>
-            <h2 class="section-title">Ebedi Iz</h2>
-        </div>
-        <p class="legacy-text reveal">
-            <strong>2016</strong>'da baslayan bu yolculuk, bugun <strong>2026</strong>'da zirvede devam ediyor.
-            Uc kurucu, on sekiz asker. <strong>LANETLI</strong> ebedi, <strong>LANETLI</strong> sonsuz.
-            "Dusmanlarimiz bizi hatirlayacak, cunku biz onlarin kabusuyduk."
+        <h1>
+            <span class="l1">LANETLİ</span><br>
+            <span class="l2">TEAM</span>
+        </h1>
+        <p class="hero-sub">Kuralları Yıkar, Sınırları Zorlar</p>
+        <div class="hero-line"></div>
+        <p class="hero-desc">
+            Eşi benzeri görülmemiş bir güç, eşi benzeri görülmemiş bir vizyon. 
+            Biz sadece bir ekip değiliz, biz bir hareketiz.
         </p>
-        <div class="legacy-signature reveal">LANETLI Team</div>
+        <div class="hero-btns">
+            <a href="#founders" class="btn btn-red">
+                <i class="fas fa-crown"></i> Ekibi Keşfet
+            </a>
+            <a href="#philosophy" class="btn btn-outline">
+                <i class="fas fa-eye"></i> Felsefemiz
+            </a>
+        </div>
+        <div class="scroll-down" onclick="document.getElementById('stats').scrollIntoView({behavior:'smooth'})">
+            <span>Aşağı İn</span>
+            <div class="arrow"></div>
+        </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer" id="footer">
-        <div class="footer-brand">LANE<span>TLI</span></div>
-        <p class="footer-tagline">Karanliğin Hukum Surdugu Yer</p>
-        <div class="footer-links">
-            <a href="https://tiktok.com/@lanxtli" target="_blank">@lanxtli</a>
-            <a href="https://tiktok.com/@lxnetli" target="_blank">@lxnetli</a>
+    <!-- STATS -->
+    <section id="stats" style="padding: 0;">
+        <div class="stats-bar">
+            <div class="stat-cell fade-up">
+                <div class="stat-num">3</div>
+                <div class="stat-label">Kurucu</div>
+            </div>
+            <div class="stat-cell fade-up">
+                <div class="stat-num">∞</div>
+                <div class="stat-label">Potansiyel</div>
+            </div>
+            <div class="stat-cell fade-up">
+                <div class="stat-num">100%</div>
+                <div class="stat-label">Lanetli</div>
+            </div>
+            <div class="stat-cell fade-up">
+                <div class="stat-num">0</div>
+                <div class="stat-label">Sınır</div>
+            </div>
         </div>
-        <p class="footer-copy">LANETLI TEAM 2026. TUM HAKLARI SAKLIDIR.</p>
+    </section>
+
+    <!-- FOUNDERS -->
+    <section id="founders">
+        <div class="sec-head fade-up">
+            <h2>KURUCULAR</h2>
+            <p>Ekibin arkasındaki efsanevi isimler</p>
+        </div>
+        
+        <div class="founders-grid">
+            <!-- LanetliTrexA -->
+            <div class="founder-card fade-up">
+                <div class="founder-avatar-wrap">
+                    <div class="founder-avatar-ring"></div>
+                    <div class="founder-avatar">T</div>
+                </div>
+                <div class="founder-name">
+                    LanetliTrexA
+                    <i class="fas fa-check-circle verified" title="Onaylı Hesap"></i>
+                </div>
+                <div class="founder-role">Kurucu #1</div>
+                <p class="founder-desc">
+                    Vizyon sahibi, stratejik düşünür ve ekibin beyni. 
+                    Her şeyin başlangıcı, her şeyin sonu.
+                </p>
+                <div class="founder-quote-box">
+                    <p>"Güç, paranın satın alamayacağı tek şeydir. Ve biz gücü satın almayız, biz gücü yaratırız."</p>
+                </div>
+                <div class="founder-rank">
+                    <i class="fas fa-crown"></i>
+                    Ekip Lideri
+                </div>
+            </div>
+
+            <!-- LanetliEmre -->
+            <div class="founder-card fade-up">
+                <div class="founder-avatar-wrap">
+                    <div class="founder-avatar-ring"></div>
+                    <div class="founder-avatar">E</div>
+                </div>
+                <div class="founder-name">
+                    LanetliEmre
+                    <i class="fas fa-check-circle verified" title="Onaylı Hesap"></i>
+                </div>
+                <div class="founder-role">Kurucu #2</div>
+                <p class="founder-desc">
+                    Teknik deha, kodların ustası ve dijital dünyanın hakimi. 
+                    Sistemleri kırar, kuralları yeniden yazar.
+                </p>
+                <div class="founder-quote-box">
+                    <p>"Kod yazmak bir sanattır, ve ben bu sanatın Michelangelo'suyum. Her satır bir başyapıt."</p>
+                </div>
+                <div class="founder-rank">
+                    <i class="fas fa-code"></i>
+                    Teknik Direktör
+                </div>
+            </div>
+
+            <!-- LanetliPablo -->
+            <div class="founder-card fade-up">
+                <div class="founder-avatar-wrap">
+                    <div class="founder-avatar-ring"></div>
+                    <div class="founder-avatar">P</div>
+                </div>
+                <div class="founder-name">
+                    LanetliPablo
+                    <i class="fas fa-check-circle verified" title="Onaylı Hesap"></i>
+                </div>
+                <div class="founder-role">Kurucu #3</div>
+                <p class="founder-desc">
+                    Yaratıcı zeka, marka mimarı ve estetiğin efendisi. 
+                    Her detayda mükemmellik, her projede efsane.
+                </p>
+                <div class="founder-quote-box">
+                    <p>"Güzellik geçicidir, ama efsane sonsuzdur. Biz efsane yaratıyoruz, sadece güzel şeyler değil."</p>
+                </div>
+                <div class="founder-rank">
+                    <i class="fas fa-palette"></i>
+                    Kreatif Direktör
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHILOSOPHY -->
+    <section class="philosophy" id="philosophy">
+        <div class="sec-head fade-up">
+            <h2>FELSEFEMİZ</h2>
+            <p>Bizi biz yapan prensipler</p>
+        </div>
+        
+        <div class="phil-grid">
+            <div class="phil-card fade-up">
+                <div class="num">01</div>
+                <h3><i class="fas fa-fire"></i> Cesaret</h3>
+                <p>Korku bizim için bir seçenek değildir. Her zorluğun üstesinden gelir, her engeli aşarız. Cesaret, lanetli ruhun en temel özelliğidir.</p>
+            </div>
+            <div class="phil-card fade-up">
+                <div class="num">02</div>
+                <h3><i class="fas fa-bolt"></i> Güç</h3>
+                <p>Güç satın alınmaz, yaratılır. Bizim gücümüz birliğimizden, vizyonumuzdan ve durdurulamaz irademizden gelir.</p>
+            </div>
+            <div class="phil-card fade-up">
+                <div class="num">03</div>
+                <h3><i class="fas fa-eye"></i> Vizyon</h3>
+                <p>Geçmişi unut, geleceği yarat. Biz sadece bugünü değil, yarını da görürüz. Her adımımız geleceğe atılmış bir imzadır.</p>
+            </div>
+            <div class="phil-card fade-up">
+                <div class="num">04</div>
+                <h3><i class="fas fa-skull"></i> Lanet</h3>
+                <p>Lanetli olmak bir seçimdir. Sıradan olmamak, kuralları yıkmak ve kendi yolunu çizmek. Biz lanetliyiz ve bundan gurur duyuyoruz.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- POWER -->
+    <section class="power-section" id="power">
+        <div class="power-text fade-up">KURALLARI BİZ YAZARIZ</div>
+        <p class="power-sub fade-up">
+            Dünya bize kurallar koymaya çalıştı. Biz o kuralları <strong>yıktık</strong>. 
+            Şimdi yeni bir dünya inşa ediyoruz ve bu dünyada <strong>tek kural</strong> var: 
+            Ya en iyisi olursun, ya hiçbir şey olamazsın.
+        </p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">LANETLİ TEAM</div>
+        <div class="footer-line"></div>
+        <p class="footer-text">
+            Dünyanın en lanetli ekibi. Kuralları yıkar, sınırları zorlar ve 
+            efsaneler yaratırız.
+        </p>
+        <div class="footer-bottom">
+            © 2026 LANETLİ TEAM — Tüm Hakları Saklıdır — Dünyanın En Lanetli Ekibi
+        </div>
     </footer>
 
     <script>
-        // ===== LOADER =====
-        const loader = document.getElementById('loader');
-        const loaderPercent = document.getElementById('loaderPercent');
-        let loadProgress = 0;
-
-        const loadInterval = setInterval(() => {
-            loadProgress += Math.random() * 8 + 2;
-            if (loadProgress >= 100) {
-                loadProgress = 100;
-                clearInterval(loadInterval);
-                setTimeout(() => loader.classList.add('done'), 1000);
-            }
-            loaderPercent.textContent = Math.floor(loadProgress) + '%';
-        }, 100);
-
-        // ===== CURSOR =====
-        const cursor = document.getElementById('cursor');
-        const cursorRing = document.getElementById('cursorRing');
-        const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
-
-        if (!isTouchDevice) {
-            let mouseX = 0, mouseY = 0;
-            let ringX = 0, ringY = 0;
-
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                cursor.style.left = mouseX - 6 + 'px';
-                cursor.style.top = mouseY - 6 + 'px';
-            });
-
-            function animateRing() {
-                ringX += (mouseX - ringX) * 0.1;
-                ringY += (mouseY - ringY) * 0.1;
-                cursorRing.style.left = ringX - 25 + 'px';
-                cursorRing.style.top = ringY - 25 + 'px';
-                requestAnimationFrame(animateRing);
-            }
-            animateRing();
-
-            const hoverElements = document.querySelectorAll('a, button, .founder-card, .member-card, .social-btn, .stat, .btn, .menu-toggle');
-            hoverElements.forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    cursor.classList.add('hover');
-                    cursorRing.classList.add('hover');
-                });
-                el.addEventListener('mouseleave', () => {
-                    cursor.classList.remove('hover');
-                    cursorRing.classList.remove('hover');
-                });
-            });
-        }
-
-        // ===== FULLSCREEN MENU =====
-        const menuToggle = document.getElementById('menuToggle');
-        const fullscreenMenu = document.getElementById('fullscreenMenu');
-
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            fullscreenMenu.classList.toggle('active');
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('done');
+            }, 1800);
         });
 
-        fullscreenMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                menuToggle.classList.remove('active');
-                fullscreenMenu.classList.remove('active');
-            });
-        });
-
-        // ===== NAV SCROLL =====
-        const nav = document.getElementById('nav');
+        // Navbar scroll
         window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.pageYOffset > 80);
+            const nav = document.getElementById('navbar');
+            nav.classList.toggle('scrolled', window.scrollY > 80);
         });
 
-        // ===== SMOOTH SCROLL =====
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const target = document.querySelector(a.getAttribute('href'));
+                if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
 
-        // ===== SCROLL REVEAL =====
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
+        // Intersection Observer for fade-up
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
-        revealElements.forEach(el => revealObserver.observe(el));
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-        // ===== 3D TILT =====
-        const tiltCards = document.querySelectorAll('[data-tilt]');
-        tiltCards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                if (isTouchDevice) return;
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = (y - centerY) / centerY * -12;
-                const rotateY = (x - centerX) / centerX * 12;
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-20px)`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-            });
-        });
-
-        // ===== PARTICLES =====
-        const canvas = document.getElementById('particles');
+        // Fire particle canvas
+        const canvas = document.getElementById('fireCanvas');
         const ctx = canvas.getContext('2d');
-        let width, height;
         let particles = [];
-        const particleCount = isTouchDevice ? 20 : 45;
+        let w, h;
 
-        function resizeCanvas() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
         }
-
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        resize();
+        window.addEventListener('resize', resize);
 
         class Particle {
             constructor() {
                 this.reset();
             }
-
             reset() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.size = Math.random() * 2.5 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.2;
-                this.speedY = (Math.random() - 0.5) * 0.2;
-                this.opacity = Math.random() * 0.2 + 0.05;
-                this.life = Math.random() * 400 + 200;
+                this.x = Math.random() * w;
+                this.y = h + Math.random() * 100;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = -Math.random() * 2 - 0.5;
+                this.size = Math.random() * 3 + 1;
+                this.life = Math.random() * 100 + 50;
                 this.maxLife = this.life;
+                this.colors = [
+                    [255, 0, 60],
+                    [188, 19, 254],
+                    [0, 240, 255],
+                    [255, 215, 0]
+                ];
+                this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
             }
-
             update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
+                this.x += this.vx;
+                this.y += this.vy;
                 this.life--;
-                if (this.life <= 0 || this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
-                    this.reset();
-                }
+                this.size *= 0.995;
+                if(this.life <= 0 || this.size < 0.5) this.reset();
             }
-
             draw() {
-                const alpha = (this.life / this.maxLife) * this.opacity;
+                const alpha = this.life / this.maxLife;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 10, 10, ${alpha})`;
+                ctx.fillStyle = `rgba(${this.color[0]}, ${this.color[1]}, ${this.color[2]}, ${alpha * 0.6})`;
                 ctx.fill();
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = `rgba(${this.color[0]}, ${this.color[1]}, ${this.color[2]}, ${alpha * 0.3})`;
             }
         }
 
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
+        for(let i = 0; i < 80; i++) particles.push(new Particle());
+
+        function animate() {
+            ctx.clearRect(0, 0, w, h);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
         }
-
-        function connectParticles() {
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 200) {
-                        const alpha = (1 - dist / 200) * 0.03;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(255, 10, 10, ${alpha})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        let frameCount = 0;
-        function animateParticles() {
-            ctx.clearRect(0, 0, width, height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            frameCount++;
-            if (frameCount % 2 === 0) connectParticles();
-            requestAnimationFrame(animateParticles);
-        }
-
-        animateParticles();
-
-        // ===== CONSOLE =====
-        console.log('%c  ☠ LANETLI ☠  ', 'background: #ff0a0a; color: #fff; font-size: 28px; font-family: Orbitron; padding: 14px 28px; border-radius: 4px; font-weight: 900;');
-        console.log('%cLANETLI TEAM 2026', 'color: #555; font-size: 14px; font-family: Rajdhani; font-weight: 600;');
-        console.log('%c3 Kurucu: TREXA, EMRE, PABLO', 'color: #d4af37; font-size: 13px; font-family: Cinzel;');
-        console.log('%c12 Erkek + 6 Kiz = 18 LANETLI Asker', 'color: #ff0a0a; font-size: 11px; font-family: Orbitron;');
-        console.log('%c"Say hello to my little friend!" - Tony Montana', 'color: #c0c0c0; font-size: 10px; font-style: italic;');
+        animate();
     </script>
 </body>
 </html>
